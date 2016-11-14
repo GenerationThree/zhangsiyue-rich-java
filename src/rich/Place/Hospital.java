@@ -5,6 +5,6 @@ import rich.Player;
 public class Hospital implements Place {
     @Override
     public Player.Status arrive(Player player) {
-        return null;
+        return Player.Status.END_TURN;
     }
 }

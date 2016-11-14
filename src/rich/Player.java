@@ -132,6 +132,11 @@ public class Player {
         }
     }
 
+    public void goToHospital(Hospital hospital){
+        currentPlace = hospital;
+        waitTurn = 3;
+    }
+
     public Status getStatus() {
         return status;
     }
