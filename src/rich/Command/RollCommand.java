@@ -38,4 +38,6 @@ public class RollCommand implements Command {
         return Player.Status.END_TURN;
     };
 
+    public static Response NoToPromote = player -> Player.Status.END_TURN;
+
 }
