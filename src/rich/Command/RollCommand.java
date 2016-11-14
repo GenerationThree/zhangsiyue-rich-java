@@ -2,6 +2,7 @@ package rich.Command;
 
 import rich.Dice;
 import rich.Map;
+import rich.Place.Estate;
 import rich.Place.Place;
 import rich.Player;
 
@@ -18,6 +19,13 @@ public class RollCommand implements Command {
     public Player.Status execute(Player player) {
         Place target = map.move(player.getCurrentPlace(), dice.next());
         player.moveTo(target);
+        if (target instanceof Estate){
+            Estate estate = ((Estate) target);
+            if (estate.getOwner() == player)
+                return Player.Status.WAIT_RESPONSE;
+            else
+                return Player.Status.END_TURN;
+        }
         return Player.Status.WAIT_RESPONSE;
     }
 
