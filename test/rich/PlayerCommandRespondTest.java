@@ -6,6 +6,7 @@ import rich.Command.Response;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -55,9 +56,9 @@ public class PlayerCommandRespondTest {
 
         player.executeCommand(command);
 
-        when(command.respond(eq(player), eq(response))).thenReturn(Player.Status.END_TURN);
+        when(command.respond(eq(player), eq(response), any())).thenReturn(Player.Status.END_TURN);
 
-        player.respond(response);
+        player.respond(response, "");
 
         assertThat(player.getStatus(), is(Player.Status.END_TURN));
     }
@@ -68,9 +69,9 @@ public class PlayerCommandRespondTest {
 
         player.executeCommand(command);
 
-        when(command.respond(eq(player), eq(response))).thenReturn(Player.Status.WAIT_RESPONSE);
+        when(command.respond(eq(player), eq(response), any())).thenReturn(Player.Status.WAIT_RESPONSE);
 
-        player.respond(response);
+        player.respond(response, "");
 
         assertThat(player.getStatus(), is(Player.Status.WAIT_RESPONSE));
     }

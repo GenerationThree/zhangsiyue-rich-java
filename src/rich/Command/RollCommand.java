@@ -23,22 +23,28 @@ public class RollCommand implements Command {
     }
 
     @Override
-    public Player.Status respond(Player player, Response response) {
-        return response.execute(player);
+    public Player.Status respond(Player player, Response response, String parameter) {
+        return response.execute(player, parameter);
     }
 
-    public static Response YesToBuy = player -> {
+    public static Response YesToBuy = (player,parameter) -> {
         player.buy();
         return Player.Status.END_TURN;
     };
 
-    public static Response NoToBuy = player -> Player.Status.END_TURN;
+    public static Response NoToBuy = (player,parameter) -> Player.Status.END_TURN;
 
-    public static Response YesToPromote = player -> {
+    public static Response YesToPromote = (player,parameter) -> {
         player.promoteEstate();
         return Player.Status.END_TURN;
     };
 
-    public static Response NoToPromote = player -> Player.Status.END_TURN;
+    public static Response NoToPromote = (player,parameter) -> Player.Status.END_TURN;
+
+    public static Response BuyToll = (player, parameter) -> {
+        int choice = Integer.valueOf(parameter);
+        player.buyTool(choice);
+        return Player.Status.WAIT_RESPONSE;
+    };
 
 }

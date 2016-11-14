@@ -4,5 +4,5 @@ import rich.Player;
 
 public interface Response {
 
-    Player.Status execute(Player player);
+    Player.Status execute(Player player, String parameter);
 }

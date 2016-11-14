@@ -65,8 +65,8 @@ public class Player {
         lastExecuted = command;
     }
 
-    public void respond(Response response) {
-        status = lastExecuted.respond(this, response);
+    public void respond(Response response, String parameter) {
+        status = lastExecuted.respond(this, response, parameter);
     }
 
     public void moveTo(Place place) {

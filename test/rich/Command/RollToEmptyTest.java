@@ -56,7 +56,7 @@ public class RollToEmptyTest {
 
         player.executeCommand(rollCommand);
 
-        player.respond(rollCommand.YesToBuy);
+        player.respond(rollCommand.YesToBuy, "");
         assertThat(player.getStatus(), is(Player.Status.END_TURN));
     }
 
@@ -70,7 +70,7 @@ public class RollToEmptyTest {
 
         player.executeCommand(rollCommand);
 
-        player.respond(rollCommand.YesToBuy);
+        player.respond(rollCommand.YesToBuy, "");
         assertThat(player.getEstates().size(), is(1));
         assertThat(player.getBalance(), is(INIT_BALANCE - IN_BALANCE));
     }
@@ -85,7 +85,7 @@ public class RollToEmptyTest {
 
         player.executeCommand(rollCommand);
 
-        player.respond(rollCommand.NoToBuy);
+        player.respond(rollCommand.NoToBuy, "");
         assertThat(player.getStatus(), is(Player.Status.END_TURN));
         assertThat(player.getEstates().size(), is(0));
         assertThat(player.getBalance(), is(INIT_BALANCE));

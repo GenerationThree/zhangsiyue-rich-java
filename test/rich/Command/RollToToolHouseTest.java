@@ -8,6 +8,7 @@ import rich.Place.Place;
 import rich.Place.Prison;
 import rich.Place.ToolHouse;
 import rich.Player;
+import rich.Tool.Tool;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -52,5 +53,18 @@ public class RollToToolHouseTest {
         player.executeCommand(rollCommand);
 
         assertThat(player.getStatus(), is(Player.Status.END_TURN));
+    }
+
+    @Test
+    public void should_wait_response_when_respond_buy_tool_at_tool_house() throws Exception {
+        Player player = Player.createPlayerWithPoints(toolHouse, 100);
+
+        player.executeCommand(rollCommand);
+
+        player.respond(rollCommand.BuyToll, "1");
+
+        assertThat(player.getStatus(), is(Player.Status.WAIT_RESPONSE));
+        assertThat(player.getPoints(), is(100 - Tool.Type.BLOCK.getPointPrice()));
+
     }
 }
