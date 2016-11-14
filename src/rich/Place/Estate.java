@@ -13,14 +13,14 @@ public class Estate implements Place {
         level = Level.ZERO;
     }
 
-    public static Estate createEstateWithOwner(double price, Player owner){
+    public static Estate createEstateWithOwner(double price, Player owner) {
         Estate estate = new Estate(price);
         estate.owner = owner;
         return estate;
     }
 
-    public boolean buy(Player player){
-        if(owner == null) {
+    public boolean buy(Player player) {
+        if (owner == null) {
             owner = player;
             return true;
         }
@@ -40,11 +40,23 @@ public class Estate implements Place {
     }
 
     public boolean promote() {
-        if(level.ordinal() < Level.TOP.ordinal()) {
+        if (level.ordinal() < Level.TOP.ordinal()) {
             level = level.next();
             return true;
         }
         return false;
+    }
+
+    @Override
+    public Player.Status arrive(Player player) {
+        if (owner == null || owner == player)
+            return Player.Status.WAIT_RESPONSE;
+        else {
+            if (player.payFee())
+                return Player.Status.END_TURN;
+            else
+                return Player.Status.END_GAME;
+        }
     }
 
     public enum Level {

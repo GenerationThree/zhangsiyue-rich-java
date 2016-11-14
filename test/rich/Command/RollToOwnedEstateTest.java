@@ -40,7 +40,7 @@ public class RollToOwnedEstateTest {
     @Test
     public void should_wait_response_when_roll_owned_estate() throws Exception {
         Player player = Player.createPlayerWithBalanceAndEstate(starting, INIT_BALANCE, estate);
-        when(estate.getOwner()).thenReturn(player);
+        when(estate.arrive(player)).thenReturn(Player.Status.WAIT_RESPONSE);
 
         player.executeCommand(rollCommand);
 

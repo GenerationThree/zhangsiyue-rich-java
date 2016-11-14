@@ -19,16 +19,7 @@ public class RollCommand implements Command {
     public Player.Status execute(Player player) {
         Place target = map.move(player.getCurrentPlace(), dice.next());
         player.moveTo(target);
-        if (target instanceof Estate){
-            Estate estate = ((Estate) target);
-            if (estate.getOwner() == null || estate.getOwner() == player)
-                return Player.Status.WAIT_RESPONSE;
-            else {
-                player.payFee();
-                return Player.Status.END_TURN;
-            }
-        }
-        return Player.Status.WAIT_RESPONSE;
+        return target.arrive(player);
     }
 
     @Override

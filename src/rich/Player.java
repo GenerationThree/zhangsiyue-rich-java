@@ -66,9 +66,12 @@ public class Player {
     public boolean payFee(){
         Estate estate = (Estate)currentPlace;
         double fee = estate.getPrice() * estate.getLevel().getFeeTimes();
-        balance -= fee;
-        ((Estate) currentPlace).getOwner().gainFee(fee);
-        return true;
+        if(balance >= fee) {
+            balance -= fee;
+            ((Estate) currentPlace).getOwner().gainFee(fee);
+            return true;
+        }
+        return false;
     }
 
     public void gainFee(Double fee){
@@ -92,6 +95,6 @@ public class Player {
     }
 
     public enum Status {
-        WAIT_RESPONSE, END_TURN, WAIT_COMMAND
+        WAIT_RESPONSE, END_TURN, WAIT_COMMAND, END_GAME
     }
 }

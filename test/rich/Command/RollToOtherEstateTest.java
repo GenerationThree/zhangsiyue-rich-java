@@ -31,11 +31,8 @@ public class RollToOtherEstateTest {
         map = mock(Map.class);
         dice = mock(Dice.class);
         starting = mock(Place.class);
-        otherEstate = mock(Estate.class);
         otherPlayer = Player.createPlayerWithBalanceAndEstate(starting, INIT_BALANCE, otherEstate);
-        when(otherEstate.getPrice()).thenReturn(IN_BALANCE);
-        when(otherEstate.getLevel()).thenReturn(Estate.Level.ONE);
-        when(otherEstate.getOwner()).thenReturn(otherPlayer);
+        otherEstate = Estate.createEstateWithOwner(IN_BALANCE, otherPlayer);
         rollCommand = new RollCommand(map, dice);
 
         when(dice.next()).thenReturn(1);
