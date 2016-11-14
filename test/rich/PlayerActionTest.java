@@ -88,6 +88,5 @@ public class PlayerActionTest {
         player.promoteEstate();
 
         assertThat(player.getBalance(), is(IN_BALANCE - 1));
-
     }
 }
