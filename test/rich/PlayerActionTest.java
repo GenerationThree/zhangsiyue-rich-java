@@ -1,10 +1,7 @@
 package rich;
 
 import org.junit.Test;
-import rich.Place.Estate;
-import rich.Place.Hospital;
-import rich.Place.Place;
-import rich.Place.Prison;
+import rich.Place.*;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -141,5 +138,15 @@ public class PlayerActionTest {
 
         assertThat(player.getBalance(), is(INIT_BALANCE));
         assertThat(otherPlayer.getBalance(), is(INIT_BALANCE));
+    }
+
+    @Test
+    public void should_buy_tool() throws Exception {
+        Place toolHouse = mock(ToolHouse.class);
+        Player player = Player.createPlayerWithPoints(toolHouse, 100);
+
+        player.buyTool(1);
+
+        assertThat(player.getTools().size(), is(1));
     }
 }

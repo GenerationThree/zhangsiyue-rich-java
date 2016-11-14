@@ -6,6 +6,7 @@ import rich.Place.Hospital;
 import rich.Place.Place;
 import rich.Command.Response;
 import rich.Place.Prison;
+import rich.Tool.Tool;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ public class Player {
     private int freeTurns;
     private int waitTurn;
     private int points;
+    private List<Tool> tools;
 
     public Player() {
         status = Status.END_TURN;
@@ -29,6 +31,7 @@ public class Player {
         freeTurns = 0;
         waitTurn = 0;
         points = 0;
+        tools = new ArrayList<>();
     }
 
     public static Player createPlayerWithStarting(Place starting) {
@@ -106,6 +109,10 @@ public class Player {
         this.waitTurn = waitTurn;
     }
 
+    public void buyTool(int choice){
+        tools.add(new Tool(Tool.Type.values()[choice - 1]));
+    }
+
     public Status getStatus() {
         return status;
     }
@@ -128,6 +135,10 @@ public class Player {
 
     public int getPoints() {
         return points;
+    }
+
+    public List<Tool> getTools() {
+        return tools;
     }
 
     public enum Status {
