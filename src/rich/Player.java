@@ -7,6 +7,10 @@ public class Player {
         status = command.execute(this);
     }
 
+    public void respond(Response response) {
+        status = response.execute(this);
+    }
+
     public Status getStatus() {
         return status;
     }
