@@ -53,11 +53,21 @@ public class Estate implements Place {
             public Level next() {
                 return ONE;
             }
+
+            @Override
+            public double getFeeTimes() {
+                return 0.5;
+            }
         },
         ONE {
             @Override
             public Level next() {
                 return TOP;
+            }
+
+            @Override
+            public double getFeeTimes() {
+                return 1;
             }
         },
         TWO {
@@ -65,14 +75,26 @@ public class Estate implements Place {
             public Level next() {
                 return TOP;
             }
+
+            @Override
+            public double getFeeTimes() {
+                return 2;
+            }
         },
         TOP {
             @Override
             public Level next() {
                 return TOP;
             }
+
+            @Override
+            public double getFeeTimes() {
+                return 4;
+            }
         };
 
         public abstract Level next();
+
+        public abstract double getFeeTimes();
     }
 }

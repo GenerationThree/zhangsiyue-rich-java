@@ -35,6 +35,7 @@ public class RollToOtherEstateTest {
         otherPlayer = Player.createPlayerWithBalanceAndEstate(starting, INIT_BALANCE, otherEstate);
         when(otherEstate.getPrice()).thenReturn(IN_BALANCE);
         when(otherEstate.getLevel()).thenReturn(Estate.Level.ONE);
+        when(otherEstate.getOwner()).thenReturn(otherPlayer);
         rollCommand = new RollCommand(map, dice);
 
         when(dice.next()).thenReturn(1);
@@ -48,6 +49,16 @@ public class RollToOtherEstateTest {
         player.executeCommand(rollCommand);
 
         assertThat(player.getStatus(), is(Player.Status.END_TURN));
+    }
 
+    @Test
+    public void should_pay_fee_when_roll_to_other_estate() throws Exception {
+        final double fee = otherEstate.getPrice() * otherEstate.getLevel().getFeeTimes();
+        Player player = Player.createPlayerWithBalanceAndEstate(starting, INIT_BALANCE);
+
+        player.executeCommand(rollCommand);
+
+        assertThat(player.getBalance(), is(INIT_BALANCE - fee));
+        assertThat(otherPlayer.getBalance(), is(INIT_BALANCE + fee));
     }
 }

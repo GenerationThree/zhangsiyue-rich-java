@@ -23,8 +23,10 @@ public class RollCommand implements Command {
             Estate estate = ((Estate) target);
             if (estate.getOwner() == null || estate.getOwner() == player)
                 return Player.Status.WAIT_RESPONSE;
-            else
+            else {
+                player.payFee();
                 return Player.Status.END_TURN;
+            }
         }
         return Player.Status.WAIT_RESPONSE;
     }

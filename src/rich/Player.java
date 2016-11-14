@@ -63,6 +63,18 @@ public class Player {
             balance -= estate.getPrice();
     }
 
+    public boolean payFee(){
+        Estate estate = (Estate)currentPlace;
+        double fee = estate.getPrice() * estate.getLevel().getFeeTimes();
+        balance -= fee;
+        ((Estate) currentPlace).getOwner().gainFee(fee);
+        return true;
+    }
+
+    public void gainFee(Double fee){
+        balance += fee;
+    }
+
     public Status getStatus() {
         return status;
     }
