@@ -19,12 +19,14 @@ public class Player {
     private List<Place> estates;
     Command lastExecuted;
     private int freeTurns;
+    private int waitTurn;
 
     public Player() {
         status = Status.END_TURN;
         balance = 0;
         estates = new ArrayList<>();
         freeTurns = 0;
+        waitTurn = 0;
     }
 
     public static Player createPlayerWithStarting(Place starting) {
@@ -91,6 +93,10 @@ public class Player {
         balance += fee;
     }
 
+    public void inPrison(int waitTurn){
+        this.waitTurn = waitTurn;
+    }
+
     public Status getStatus() {
         return status;
     }
@@ -105,6 +111,10 @@ public class Player {
 
     public List<Place> getEstates() {
         return estates;
+    }
+
+    public int getWaitTurn() {
+        return waitTurn;
     }
 
     public enum Status {
