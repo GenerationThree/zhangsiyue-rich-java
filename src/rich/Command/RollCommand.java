@@ -21,7 +21,7 @@ public class RollCommand implements Command {
         player.moveTo(target);
         if (target instanceof Estate){
             Estate estate = ((Estate) target);
-            if (estate.getOwner() == player)
+            if (estate.getOwner() == null || estate.getOwner() == player)
                 return Player.Status.WAIT_RESPONSE;
             else
                 return Player.Status.END_TURN;
