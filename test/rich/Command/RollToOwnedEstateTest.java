@@ -14,7 +14,7 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class RollToOwnedEstateCommandTest {
+public class RollToOwnedEstateTest {
 
     private Map map;
     private Dice dice;
@@ -95,7 +95,6 @@ public class RollToOwnedEstateCommandTest {
 
         assertThat(player.getBalance(), is(IN_BALANCE - 1));
     }
-
 
     @Test
     public void should_end_turn_when_say_no_to_promote() throws Exception {
