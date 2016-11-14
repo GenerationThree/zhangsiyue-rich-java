@@ -57,6 +57,12 @@ public class Player {
         }
     }
 
+    public void promoteEstate() {
+        Estate estate = ((Estate)currentPlace);
+        if(balance >= estate.getPrice() && estate.promote())
+            balance -= estate.getPrice();
+    }
+
     public Status getStatus() {
         return status;
     }

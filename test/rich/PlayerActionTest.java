@@ -54,4 +54,40 @@ public class PlayerActionTest {
         assertThat(player.getEstates().size(), is(0));
 
     }
+
+    @Test
+    public void should_decrease_balance_after_promote_estate() throws Exception {
+        Estate estate = mock(Estate.class);
+        Player player = Player.createPlayerWithBalanceAndEstate(estate, INIT_BALANCE, estate);
+        when(estate.promote()).thenReturn(true);
+        when(estate.getPrice()).thenReturn(IN_BALANCE);
+
+        player.promoteEstate();
+
+        assertThat(player.getBalance(), is(INIT_BALANCE - IN_BALANCE));
+    }
+
+    @Test
+    public void should_not_decrease_balance_when_promote_estate_failed() throws Exception {
+        Estate estate = mock(Estate.class);
+        Player player = Player.createPlayerWithBalanceAndEstate(estate, INIT_BALANCE, estate);
+        when(estate.promote()).thenReturn(false);
+
+        player.promoteEstate();
+
+        assertThat(player.getBalance(), is(INIT_BALANCE));
+    }
+
+    @Test
+    public void should_not_promote_estate_with_out_enough_balance() throws Exception {
+        Estate estate = mock(Estate.class);
+        Player player = Player.createPlayerWithBalanceAndEstate(estate, IN_BALANCE - 1, estate);
+        when(estate.promote()).thenReturn(false);
+        when(estate.getPrice()).thenReturn(IN_BALANCE);
+
+        player.promoteEstate();
+
+        assertThat(player.getBalance(), is(IN_BALANCE - 1));
+
+    }
 }
