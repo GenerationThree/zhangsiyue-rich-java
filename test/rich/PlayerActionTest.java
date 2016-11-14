@@ -2,6 +2,7 @@ package rich;
 
 import org.junit.Test;
 import rich.Place.*;
+import rich.Tool.Tool;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -148,5 +149,17 @@ public class PlayerActionTest {
         player.buyTool(1);
 
         assertThat(player.getTools().size(), is(1));
+        assertThat(player.getPoints(), is(100 - Tool.Type.BLOCK.getPointPrice()));
+    }
+
+    @Test
+    public void should_not_buy_tool_without_enough_points() throws Exception {
+        Place toolHouse = mock(ToolHouse.class);
+        Player player = Player.createPlayerWithPoints(toolHouse, Tool.Type.BLOCK.getPointPrice() - 1);
+
+        player.buyTool(1);
+
+        assertThat(player.getTools().size(), is(0));
+        assertThat(player.getPoints(), is(Tool.Type.BLOCK.getPointPrice() - 1));
     }
 }

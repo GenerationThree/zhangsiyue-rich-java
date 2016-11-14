@@ -47,13 +47,13 @@ public class Player {
         return player;
     }
 
-    public static Player createPlayerWithFreeTimes(Place starting, double balance, int freeTurns, Place... estates){
+    public static Player createPlayerWithFreeTimes(Place starting, double balance, int freeTurns, Place... estates) {
         Player player = createPlayerWithBalanceAndEstate(starting, balance, estates);
         player.freeTurns = freeTurns;
         return player;
     }
 
-    public static Player createPlayerWithPoints(Place starting, int points){
+    public static Player createPlayerWithPoints(Place starting, int points) {
         Player player = new Player();
         player.currentPlace = starting;
         player.points = points;
@@ -75,25 +75,25 @@ public class Player {
 
     public void buy() {
         Estate estate = (Estate) currentPlace;
-        if(balance >= estate.getPrice() && estate.buy(this)) {
+        if (balance >= estate.getPrice() && estate.buy(this)) {
             balance -= ((Estate) currentPlace).getPrice();
             estates.add(currentPlace);
         }
     }
 
     public void promoteEstate() {
-        Estate estate = ((Estate)currentPlace);
-        if(balance >= estate.getPrice() && estate.promote())
+        Estate estate = ((Estate) currentPlace);
+        if (balance >= estate.getPrice() && estate.promote())
             balance -= estate.getPrice();
     }
 
-    public boolean payFee(){
-        Estate estate = (Estate)currentPlace;
-        if(freeTurns > 0 || estate.getOwner().getCurrentPlace() instanceof Hospital ||estate.getOwner().getCurrentPlace() instanceof Prison) {
+    public boolean payFee() {
+        Estate estate = (Estate) currentPlace;
+        if (freeTurns > 0 || estate.getOwner().getCurrentPlace() instanceof Hospital || estate.getOwner().getCurrentPlace() instanceof Prison) {
             return true;
         }
         double fee = estate.getPrice() * estate.getLevel().getFeeTimes();
-        if(balance >= fee) {
+        if (balance >= fee) {
             balance -= fee;
             ((Estate) currentPlace).getOwner().gainFee(fee);
             return true;
@@ -101,16 +101,19 @@ public class Player {
         return false;
     }
 
-    public void gainFee(Double fee){
+    public void gainFee(Double fee) {
         balance += fee;
     }
 
-    public void inPrison(int waitTurn){
+    public void inPrison(int waitTurn) {
         this.waitTurn = waitTurn;
     }
 
-    public void buyTool(int choice){
-        tools.add(new Tool(Tool.Type.values()[choice - 1]));
+    public void buyTool(int choice) {
+        if (points >= Tool.Type.values()[choice - 1].getPointPrice()) {
+            tools.add(new Tool(Tool.Type.values()[choice - 1]));
+            points -= Tool.Type.values()[choice - 1].getPointPrice();
+        }
     }
 
     public Status getStatus() {
