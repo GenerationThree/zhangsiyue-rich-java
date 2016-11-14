@@ -14,4 +14,13 @@ public class ToolHouseTest {
 
         assertThat(toolHouse.arrive(player), is(Player.Status.WAIT_RESPONSE));
     }
+
+    @Test
+    public void should_return_end_turn_when_player_with_not_enough_points_arrive() throws Exception {
+        ToolHouse toolHouse = new ToolHouse();
+        Player player = Player.createPlayerWithPoints(toolHouse, ToolHouse.POINT_LIMIT - 1);
+
+        assertThat(toolHouse.arrive(player), is(Player.Status.END_TURN));
+
+    }
 }
