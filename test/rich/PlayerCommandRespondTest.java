@@ -2,7 +2,7 @@ package rich;
 import org.junit.Before;
 import org.junit.Test;
 import rich.Command.Command;
-import rich.Response.Response;
+import rich.Command.Response;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;

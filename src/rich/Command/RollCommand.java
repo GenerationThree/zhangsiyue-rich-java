@@ -20,4 +20,7 @@ public class RollCommand implements Command{
         player.moveTo(target);
         return Player.Status.WAIT_RESPONSE;
     }
+
+    public static Response YesToBuy = player -> Player.Status.END_TURN;
+
 }

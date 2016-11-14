@@ -3,7 +3,7 @@ package rich;
 import rich.Command.Command;
 import rich.Place.Estate;
 import rich.Place.Place;
-import rich.Response.Response;
+import rich.Command.Response;
 
 import java.util.ArrayList;
 import java.util.List;

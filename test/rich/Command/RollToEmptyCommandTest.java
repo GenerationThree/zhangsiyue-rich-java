@@ -21,6 +21,10 @@ public class RollToEmptyCommandTest {
     private Place empty;
     private Place starting;
 
+    private final double INIT_BALANCE = 10000;
+    private final double IN_BALANCE = 200;
+    private RollCommand rollCommand;
+
     @Before
     public void setUp() throws Exception {
         map = mock(Map.class);
@@ -29,18 +33,27 @@ public class RollToEmptyCommandTest {
         empty = new Estate(200);
         starting = mock(Place.class);
         when(map.move(eq(starting), eq(1))).thenReturn(empty);
+
+        rollCommand = new RollCommand(map, dice);
     }
 
     @Test
     public void should_be_wait_response_after_roll_to_empty() throws Exception {
         Player player = Player.createPlayerWithStarting(starting);
 
-        Command rollCommand = new RollCommand(map, dice);
-
         player.executeCommand(rollCommand);
 
         assertThat(player.getStatus(), is(Player.Status.WAIT_RESPONSE));
     }
 
+    @Test
+    public void should_end_turn_when_user_respond_yes_at_empty() throws Exception {
+        Estate empty = new Estate(IN_BALANCE);
 
+        when(map.move(eq(starting), eq(1))).thenReturn(empty);
+
+        Player player = Player.createPlayerWithBalanceAndEstate(starting, IN_BALANCE);
+
+        player.executeCommand(rollCommand);
+    }
 }
