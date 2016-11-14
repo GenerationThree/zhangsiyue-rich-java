@@ -55,5 +55,23 @@ public class RollToEmptyCommandTest {
         Player player = Player.createPlayerWithBalanceAndEstate(starting, IN_BALANCE);
 
         player.executeCommand(rollCommand);
+
+        player.respond(rollCommand.YesToBuy);
+        assertThat(player.getStatus(), is(Player.Status.END_TURN));
+    }
+
+    @Test
+    public void should_buy_empty_when_user_respond_yes_to_buy() throws Exception {
+        Estate empty = new Estate(IN_BALANCE);
+
+        when(map.move(eq(starting), eq(1))).thenReturn(empty);
+
+        Player player = Player.createPlayerWithBalanceAndEstate(starting, INIT_BALANCE);
+
+        player.executeCommand(rollCommand);
+
+        player.respond(rollCommand.YesToBuy);
+        assertThat(player.getEstates().size(), is(1));
+        assertThat(player.getBalance(), is(INIT_BALANCE - IN_BALANCE));
     }
 }

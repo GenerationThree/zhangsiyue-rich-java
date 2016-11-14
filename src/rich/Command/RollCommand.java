@@ -26,6 +26,9 @@ public class RollCommand implements Command{
         return response.execute(player);
     }
 
-    public static Response YesToBuy = player -> Player.Status.END_TURN;
+    public static Response YesToBuy = player -> {
+        player.buy();
+        return Player.Status.END_TURN;
+    };
 
 }
