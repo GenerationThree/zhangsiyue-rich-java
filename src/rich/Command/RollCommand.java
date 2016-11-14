@@ -51,4 +51,6 @@ public class RollCommand implements Command {
             return Player.Status.END_TURN;
     };
 
+    public static Response QuiteToolHouse = (player,parameter) -> Player.Status.END_TURN;
+
 }

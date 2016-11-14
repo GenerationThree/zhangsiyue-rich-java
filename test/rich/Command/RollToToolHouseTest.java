@@ -5,7 +5,6 @@ import org.junit.Test;
 import rich.Dice;
 import rich.Map;
 import rich.Place.Place;
-import rich.Place.Prison;
 import rich.Place.ToolHouse;
 import rich.Player;
 import rich.Tool.Tool;
@@ -76,5 +75,17 @@ public class RollToToolHouseTest {
         player.respond(rollCommand.BuyToll, "1");
 
         assertThat(player.getStatus(), is(Player.Status.END_TURN));
+    }
+
+    @Test
+    public void should_end_turn_when_quite_tool_house() throws Exception {
+        Player player = Player.createPlayerWithPoints(toolHouse, 100);
+
+        player.executeCommand(rollCommand);
+
+        player.respond(rollCommand.QuiteToolHouse, "");
+
+        assertThat(player.getStatus(), is(Player.Status.END_TURN));
+
     }
 }
