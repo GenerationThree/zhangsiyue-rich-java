@@ -1,8 +1,8 @@
 package rich;
 
 import org.junit.Test;
-import rich.Place.*;
-import rich.Tool.Tool;
+import rich.place.*;
+import rich.tool.Tool;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;

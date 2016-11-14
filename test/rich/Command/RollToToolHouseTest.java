@@ -1,13 +1,13 @@
-package rich.Command;
+package rich.command;
 
 import org.junit.Before;
 import org.junit.Test;
 import rich.Dice;
-import rich.Map;
-import rich.Place.Place;
-import rich.Place.ToolHouse;
+import rich.map.Map;
+import rich.place.Place;
+import rich.place.ToolHouse;
 import rich.Player;
-import rich.Tool.Tool;
+import rich.tool.Tool;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;

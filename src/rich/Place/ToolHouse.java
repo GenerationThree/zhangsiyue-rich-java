@@ -1,7 +1,7 @@
-package rich.Place;
+package rich.place;
 
 import rich.Player;
-import rich.Tool.Tool;
+import rich.tool.Tool;
 
 import java.util.Arrays;
 import java.util.Comparator;

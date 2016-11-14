@@ -1,4 +1,4 @@
-package rich.Place;
+package rich.place;
 
 import org.junit.Test;
 import rich.Player;

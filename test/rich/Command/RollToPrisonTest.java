@@ -1,12 +1,11 @@
-package rich.Command;
+package rich.command;
 
 import org.junit.Before;
 import org.junit.Test;
 import rich.Dice;
-import rich.Map;
-import rich.Place.Estate;
-import rich.Place.Place;
-import rich.Place.Prison;
+import rich.map.Map;
+import rich.place.Place;
+import rich.place.Prison;
 import rich.Player;
 
 import static org.hamcrest.CoreMatchers.is;

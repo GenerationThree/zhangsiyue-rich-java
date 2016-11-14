@@ -1,4 +1,4 @@
-package rich.Tool;
+package rich.tool;
 
 public class Tool {
     private Type type;

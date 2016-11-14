@@ -1,10 +1,9 @@
-package rich.Command;
+package rich.command;
 
 import rich.Dice;
-import rich.Map;
-import rich.Place.Estate;
-import rich.Place.Place;
-import rich.Place.ToolHouse;
+import rich.map.Map;
+import rich.place.Place;
+import rich.place.ToolHouse;
 import rich.Player;
 
 public class RollCommand implements Command {
@@ -52,5 +51,11 @@ public class RollCommand implements Command {
     };
 
     public static Response QuiteToolHouse = (player,parameter) -> Player.Status.END_TURN;
+
+    public static Response SelectGift = (player,parameter) -> {
+        int choice = Integer.valueOf(parameter);
+        player.selectGift(choice);
+        return Player.Status.END_TURN;
+    };
 
 }

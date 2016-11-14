@@ -1,4 +1,4 @@
-package rich.Command;
+package rich.command;
 
 import rich.Player;
 

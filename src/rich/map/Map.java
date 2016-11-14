@@ -1,6 +1,6 @@
-package rich;
+package rich.map;
 
-import rich.Place.Place;
+import rich.place.Place;
 
 public interface Map {
     Place move(Place currentPlace, int steps);

@@ -1,12 +1,12 @@
 package rich;
 
-import rich.Command.Command;
-import rich.Place.Estate;
-import rich.Place.Hospital;
-import rich.Place.Place;
-import rich.Command.Response;
-import rich.Place.Prison;
-import rich.Tool.Tool;
+import rich.command.Command;
+import rich.place.Estate;
+import rich.place.Hospital;
+import rich.place.Place;
+import rich.command.Response;
+import rich.place.Prison;
+import rich.tool.Tool;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -116,6 +116,22 @@ public class Player {
         }
     }
 
+    public void selectGift(int choice){
+        switch (choice){
+            case 1:
+                balance += 2000;
+                break;
+            case 2:
+                points += 200;
+                break;
+            case 3:
+                freeTurns = 5;
+                break;
+            default:
+                break;
+        }
+    }
+
     public Status getStatus() {
         return status;
     }
@@ -142,6 +158,10 @@ public class Player {
 
     public List<Tool> getTools() {
         return tools;
+    }
+
+    public int getFreeTurns() {
+        return freeTurns;
     }
 
     public enum Status {
