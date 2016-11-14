@@ -1,20 +1,37 @@
 package rich;
 
 import rich.Command.Command;
+import rich.Place.Estate;
 import rich.Place.Place;
 import rich.Response.Response;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static java.util.Arrays.asList;
 
 public class Player {
     private Status status;
     private Place currentPlace;
+    private double balance;
+    private List<Place> estates;
 
     public Player() {
-        this.status = Status.END_TURN;
+        status = Status.END_TURN;
+        balance = 0;
+        estates = new ArrayList<>();
     }
 
-    public static Player createPlayerWithStarting(Place starting){
+    public static Player createPlayerWithStarting(Place starting) {
         Player player = new Player();
         player.currentPlace = starting;
+        return player;
+    }
+
+    public static Player createPlayerWithBalanceAndEstate(Place starting, double balance, Place... estates) {
+        Player player = createPlayerWithStarting(starting);
+        player.balance = balance;
+        player.estates.addAll(asList(estates));
         return player;
     }
 
@@ -26,8 +43,16 @@ public class Player {
         status = response.execute(this);
     }
 
-    public void moveTo(Place place){
+    public void moveTo(Place place) {
         currentPlace = place;
+    }
+
+    public void buy() {
+        Estate estate = (Estate) currentPlace;
+        if(balance >= estate.getPrice() && estate.buy(this)) {
+            balance -= ((Estate) currentPlace).getPrice();
+            estates.add(currentPlace);
+        }
     }
 
     public Status getStatus() {
@@ -36,6 +61,14 @@ public class Player {
 
     public Place getCurrentPlace() {
         return currentPlace;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public List<Place> getEstates() {
+        return estates;
     }
 
     public enum Status {

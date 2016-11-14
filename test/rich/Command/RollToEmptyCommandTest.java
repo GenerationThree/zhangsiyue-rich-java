@@ -26,7 +26,7 @@ public class RollToEmptyCommandTest {
         map = mock(Map.class);
         dice = mock(Dice.class);
         when(dice.next()).thenReturn(1);
-        empty = new Estate();
+        empty = new Estate(200);
         starting = mock(Place.class);
         when(map.move(eq(starting), eq(1))).thenReturn(empty);
     }
@@ -41,4 +41,6 @@ public class RollToEmptyCommandTest {
 
         assertThat(player.getStatus(), is(Player.Status.WAIT_RESPONSE));
     }
+
+
 }
