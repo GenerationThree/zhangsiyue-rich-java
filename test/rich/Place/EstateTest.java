@@ -26,4 +26,29 @@ public class EstateTest {
         assertThat(estate.buy(player), is(false));
         assertThat(estate.getOwner(), is(otherPlayer));
     }
+
+    @Test
+    public void should_increase_level_after_promote() throws Exception {
+        Player player = mock(Player.class);
+        Estate estate = Estate.createEstateWithOwner(200, player);
+        Estate.Level pre = estate.getLevel();
+
+        assertThat(estate.promote(), is(true));
+        assertThat(estate.getLevel(), is(pre.next()));
+
+    }
+
+    @Test
+    public void should_not_increase_level_when_estate_is_top() throws Exception {
+        Player player = mock(Player.class);
+        Estate estate = Estate.createEstateWithOwner(200, player);
+        estate.promote();
+        estate.promote();
+        estate.promote();
+
+        Estate.Level pre = estate.getLevel();
+        assertThat(pre, is(Estate.Level.TOP));
+        assertThat(estate.promote(), is(false));
+        assertThat(estate.getLevel(), is(Estate.Level.TOP));
+    }
 }
