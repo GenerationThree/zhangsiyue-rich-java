@@ -65,6 +65,16 @@ public class RollToToolHouseTest {
 
         assertThat(player.getStatus(), is(Player.Status.WAIT_RESPONSE));
         assertThat(player.getPoints(), is(100 - Tool.Type.BLOCK.getPointPrice()));
+    }
 
+    @Test
+    public void should_end_turn_when_after_respond_buy_tool_at_tool_house_without_enough_points() throws Exception {
+        Player player = Player.createPlayerWithPoints(toolHouse, ToolHouse.POINT_LIMIT + Tool.Type.BLOCK.getPointPrice() -1);
+
+        player.executeCommand(rollCommand);
+
+        player.respond(rollCommand.BuyToll, "1");
+
+        assertThat(player.getStatus(), is(Player.Status.END_TURN));
     }
 }

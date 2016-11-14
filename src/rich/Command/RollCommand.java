@@ -4,6 +4,7 @@ import rich.Dice;
 import rich.Map;
 import rich.Place.Estate;
 import rich.Place.Place;
+import rich.Place.ToolHouse;
 import rich.Player;
 
 public class RollCommand implements Command {
@@ -44,7 +45,10 @@ public class RollCommand implements Command {
     public static Response BuyToll = (player, parameter) -> {
         int choice = Integer.valueOf(parameter);
         player.buyTool(choice);
-        return Player.Status.WAIT_RESPONSE;
+        if(player.getPoints() >= ToolHouse.POINT_LIMIT)
+            return Player.Status.WAIT_RESPONSE;
+        else
+            return Player.Status.END_TURN;
     };
 
 }
