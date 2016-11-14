@@ -5,7 +5,7 @@ import rich.Map;
 import rich.Place.Place;
 import rich.Player;
 
-public class RollCommand implements Command{
+public class RollCommand implements Command {
     private Map map;
     private Dice dice;
 
@@ -32,5 +32,10 @@ public class RollCommand implements Command{
     };
 
     public static Response NoToBuy = player -> Player.Status.END_TURN;
+
+    public static Response YesToPromote = player -> {
+        player.promoteEstate();
+        return Player.Status.END_TURN;
+    };
 
 }
