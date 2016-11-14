@@ -43,6 +43,5 @@ public class RollToPrisonTest {
 
         assertThat(player.getStatus(), is(Player.Status.END_TURN));
         assertThat(player.getWaitTurn(), is(Prison.WAIT_TURN));
-
     }
 }

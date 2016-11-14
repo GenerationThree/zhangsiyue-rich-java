@@ -20,6 +20,7 @@ public class Player {
     Command lastExecuted;
     private int freeTurns;
     private int waitTurn;
+    private int points;
 
     public Player() {
         status = Status.END_TURN;
@@ -27,6 +28,7 @@ public class Player {
         estates = new ArrayList<>();
         freeTurns = 0;
         waitTurn = 0;
+        points = 0;
     }
 
     public static Player createPlayerWithStarting(Place starting) {
@@ -45,6 +47,13 @@ public class Player {
     public static Player createPlayerWithFreeTimes(Place starting, double balance, int freeTurns, Place... estates){
         Player player = createPlayerWithBalanceAndEstate(starting, balance, estates);
         player.freeTurns = freeTurns;
+        return player;
+    }
+
+    public static Player createPlayerWithPoints(Place starting, int points){
+        Player player = new Player();
+        player.currentPlace = starting;
+        player.points = points;
         return player;
     }
 
@@ -115,6 +124,10 @@ public class Player {
 
     public int getWaitTurn() {
         return waitTurn;
+    }
+
+    public int getPoints() {
+        return points;
     }
 
     public enum Status {
