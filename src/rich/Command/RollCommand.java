@@ -31,4 +31,6 @@ public class RollCommand implements Command{
         return Player.Status.END_TURN;
     };
 
+    public static Response NoToBuy = player -> Player.Status.END_TURN;
+
 }

@@ -74,4 +74,20 @@ public class RollToEmptyCommandTest {
         assertThat(player.getEstates().size(), is(1));
         assertThat(player.getBalance(), is(INIT_BALANCE - IN_BALANCE));
     }
+
+    @Test
+    public void should_end_turn_when_say_no_at_empty_land() throws Exception {
+        Estate empty = new Estate(IN_BALANCE);
+
+        when(map.move(eq(starting), eq(1))).thenReturn(empty);
+
+        Player player = Player.createPlayerWithBalanceAndEstate(starting, INIT_BALANCE);
+
+        player.executeCommand(rollCommand);
+
+        player.respond(rollCommand.NoToBuy);
+        assertThat(player.getStatus(), is(Player.Status.END_TURN));
+        assertThat(player.getEstates().size(), is(0));
+        assertThat(player.getBalance(), is(INIT_BALANCE));
+    }
 }
