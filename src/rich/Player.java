@@ -2,8 +2,10 @@ package rich;
 
 import rich.Command.Command;
 import rich.Place.Estate;
+import rich.Place.Hospital;
 import rich.Place.Place;
 import rich.Command.Response;
+import rich.Place.Prison;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +18,13 @@ public class Player {
     private double balance;
     private List<Place> estates;
     Command lastExecuted;
+    private int freeTurns;
 
     public Player() {
         status = Status.END_TURN;
         balance = 0;
         estates = new ArrayList<>();
+        freeTurns = 0;
     }
 
     public static Player createPlayerWithStarting(Place starting) {
@@ -33,6 +37,12 @@ public class Player {
         Player player = createPlayerWithStarting(starting);
         player.balance = balance;
         player.estates.addAll(asList(estates));
+        return player;
+    }
+
+    public static Player createPlayerWithFreeTimes(Place starting, double balance, int freeTurns, Place... estates){
+        Player player = createPlayerWithBalanceAndEstate(starting, balance, estates);
+        player.freeTurns = freeTurns;
         return player;
     }
 
@@ -65,6 +75,9 @@ public class Player {
 
     public boolean payFee(){
         Estate estate = (Estate)currentPlace;
+        if(freeTurns > 0 || estate.getOwner().getCurrentPlace() instanceof Hospital ||estate.getOwner().getCurrentPlace() instanceof Prison) {
+            return true;
+        }
         double fee = estate.getPrice() * estate.getLevel().getFeeTimes();
         if(balance >= fee) {
             balance -= fee;

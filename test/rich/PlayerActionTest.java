@@ -2,7 +2,9 @@ package rich;
 
 import org.junit.Test;
 import rich.Place.Estate;
+import rich.Place.Hospital;
 import rich.Place.Place;
+import rich.Place.Prison;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -88,5 +90,56 @@ public class PlayerActionTest {
         player.promoteEstate();
 
         assertThat(player.getBalance(), is(IN_BALANCE - 1));
+    }
+
+    @Test
+    public void should_return_true_and_decrease_balance_after_pay_fee_to_other_player() throws Exception {
+        Estate estate = mock(Estate.class);
+        Player otherPlayer = Player.createPlayerWithBalanceAndEstate(estate, INIT_BALANCE);
+        Player player = Player.createPlayerWithBalanceAndEstate(estate, INIT_BALANCE, estate);
+        when(estate.getOwner()).thenReturn(otherPlayer);
+        when(estate.getLevel()).thenReturn(Estate.Level.ONE);
+        when(estate.getPrice()).thenReturn(IN_BALANCE);
+        final double fee = estate.getPrice() * estate.getLevel().getFeeTimes();
+
+        player.payFee();
+
+        assertThat(player.getBalance(), is(INIT_BALANCE - fee));
+        assertThat(otherPlayer.getBalance(), is(INIT_BALANCE + fee));
+    }
+
+    @Test
+    public void should_return_true_and_not_decrease_balance_after_pay_fee_when_have_free_turns() throws Exception {
+        Estate estate = mock(Estate.class);
+        Player player = Player.createPlayerWithFreeTimes(estate, INIT_BALANCE, 1);
+        Player otherPlayer = Player.createPlayerWithBalanceAndEstate(estate, INIT_BALANCE, estate);
+        when(estate.getOwner()).thenReturn(otherPlayer);
+        when(estate.getLevel()).thenReturn(Estate.Level.ONE);
+        when(estate.getPrice()).thenReturn(IN_BALANCE);
+
+        player.payFee();
+
+        assertThat(player.getBalance(), is(INIT_BALANCE));
+        assertThat(otherPlayer.getBalance(), is(INIT_BALANCE));
+    }
+
+    @Test
+    public void should_return_tre_and_not_decrease_balance_after_pay_fee_when_owner_is_in_hospital_and_prison() throws Exception {
+        Estate estate = mock(Estate.class);
+        Hospital hospital = new Hospital();
+        Player player = Player.createPlayerWithBalanceAndEstate(estate, INIT_BALANCE);
+        Player otherPlayer = Player.createPlayerWithBalanceAndEstate(hospital, INIT_BALANCE,estate);
+        when(estate.getOwner()).thenReturn(otherPlayer);
+
+        player.payFee();
+
+        assertThat(player.getBalance(), is(INIT_BALANCE));
+        assertThat(otherPlayer.getBalance(), is(INIT_BALANCE));
+
+        Prison prison = new Prison();
+        otherPlayer = Player.createPlayerWithBalanceAndEstate(prison, INIT_BALANCE,estate);
+
+        assertThat(player.getBalance(), is(INIT_BALANCE));
+        assertThat(otherPlayer.getBalance(), is(INIT_BALANCE));
     }
 }
