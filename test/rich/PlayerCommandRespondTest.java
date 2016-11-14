@@ -19,11 +19,20 @@ public class PlayerCommandRespondTest {
     }
 
     @Test
-    public void should_be_wait_command_after_exect_command_not_need_respond() throws Exception {
+    public void should_be_wait_command_after_execute_command_not_need_respond() throws Exception {
         when(command.execute(eq(player))).thenReturn(Player.Status.WAIT_COMMAND);
 
         player.executeCommand(command);
 
         assertThat(player.getStatus(), is(Player.Status.WAIT_COMMAND));
+    }
+
+    @Test
+    public void should_wait_response_after_execute_command_need_response() throws Exception {
+        when(command.execute(eq(player))).thenReturn(Player.Status.WAIT_RESPONSE);
+
+        player.executeCommand(command);
+
+        assertThat(player.getStatus(), is(Player.Status.WAIT_RESPONSE));
     }
 }
