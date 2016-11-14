@@ -58,4 +58,14 @@ public class RollToOtherEstateTest {
         assertThat(player.getBalance(), is(INIT_BALANCE - fee));
         assertThat(otherPlayer.getBalance(), is(INIT_BALANCE + fee));
     }
+
+    @Test
+    public void should_end_game_when_pay_fee_failed_when_roll_to_other_land() throws Exception {
+        final double fee = otherEstate.getPrice() * otherEstate.getLevel().getFeeTimes();
+        Player player = Player.createPlayerWithBalanceAndEstate(starting, fee - 1);
+
+        player.executeCommand(rollCommand);
+
+        assertThat(player.getStatus(), is(Player.Status.END_GAME));
+    }
 }

@@ -19,7 +19,7 @@ public class RollCommand implements Command {
     public Player.Status execute(Player player) {
         Place target = map.move(player.getCurrentPlace(), dice.next());
         player.moveTo(target);
-        return target.arrive(player);
+        return  target.arrive(player);
     }
 
     @Override
