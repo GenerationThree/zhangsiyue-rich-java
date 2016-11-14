@@ -12,6 +12,6 @@ public class Player {
     }
 
     public enum Status {
-        WAIT_RESPONSE, WAIT_COMMAND
+        WAIT_RESPONSE, END_TURN, WAIT_COMMAND
     }
 }

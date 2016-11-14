@@ -35,4 +35,13 @@ public class PlayerCommandRespondTest {
 
         assertThat(player.getStatus(), is(Player.Status.WAIT_RESPONSE));
     }
+
+    @Test
+    public void should_be_end_turn_after_execute_command() throws Exception {
+        when(command.execute(eq(player))).thenReturn(Player.Status.END_TURN);
+
+        player.executeCommand(command);
+
+        assertThat(player.getStatus(), is(Player.Status.END_TURN));
+    }
 }
