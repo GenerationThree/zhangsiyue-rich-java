@@ -1,4 +1,6 @@
-package rich;
+package rich.Command;
+
+import rich.Player;
 
 public interface Command {
 

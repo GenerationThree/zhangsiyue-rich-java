@@ -1,4 +1,4 @@
-package rich;
+package rich.Place;
 
 public interface Place {
 }

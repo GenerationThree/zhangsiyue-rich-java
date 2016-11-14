@@ -1,4 +1,6 @@
-package rich;
+package rich.Response;
+
+import rich.Player;
 
 public interface Response {
 
