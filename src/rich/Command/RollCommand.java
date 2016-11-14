@@ -21,6 +21,11 @@ public class RollCommand implements Command{
         return Player.Status.WAIT_RESPONSE;
     }
 
+    @Override
+    public Player.Status respond(Player player, Response response) {
+        return response.execute(player);
+    }
+
     public static Response YesToBuy = player -> Player.Status.END_TURN;
 
 }

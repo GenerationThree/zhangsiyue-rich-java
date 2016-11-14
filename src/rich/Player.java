@@ -15,6 +15,7 @@ public class Player {
     private Place currentPlace;
     private double balance;
     private List<Place> estates;
+    Command lastExecuted;
 
     public Player() {
         status = Status.END_TURN;
@@ -37,10 +38,11 @@ public class Player {
 
     public void executeCommand(Command command) {
         status = command.execute(this);
+        lastExecuted = command;
     }
 
     public void respond(Response response) {
-        status = response.execute(this);
+        status = lastExecuted.respond(this, response);
     }
 
     public void moveTo(Place place) {
