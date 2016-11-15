@@ -40,7 +40,7 @@ public class RollToGiftHouseTest {
     public void should_wait_response_when_roll_to_gift_house() throws Exception {
         Player player = new Player(1, 0);
 
-        player.executeCommand(rollCommand);
+        player.executeCommand(rollCommand, "");
 
         assertThat(player.getStatus(), is(Status.WAIT_RESPONSE));
     }
@@ -49,17 +49,17 @@ public class RollToGiftHouseTest {
     public void should_end_turn_and_get_right_gift_when_respond_select_gift() throws Exception {
         Player player = new Player(1, 0);
 
-        player.executeCommand(rollCommand);
+        player.executeCommand(rollCommand, "");
         player.respond(rollCommand.SelectGift, "1");
 
         assertThat(player.getBalance(), is(Double.valueOf("2000")));
 
-        player.executeCommand(rollCommand);
+        player.executeCommand(rollCommand, "");
         player.respond(rollCommand.SelectGift, "2");
 
         assertThat(player.getPoints(), is(200));
 
-        player.executeCommand(rollCommand);
+        player.executeCommand(rollCommand, "");
         player.respond(rollCommand.SelectGift, "3");
 
         assertThat(player.getFreeTurns(), is(5));

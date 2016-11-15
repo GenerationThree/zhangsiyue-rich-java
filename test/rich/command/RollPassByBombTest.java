@@ -43,7 +43,7 @@ public class RollPassByBombTest {
     public void should_end_turn_and_go_to_hospital_when_pass_by_bomb() throws Exception {
         Player player = new Player(1, 0);
 
-        player.executeCommand(rollCommand);
+        player.executeCommand(rollCommand, "");
 
         assertThat(player.getCurrentPlace(), is(hospital));
         assertThat(player.getStatus(), is(Status.END_TURN));

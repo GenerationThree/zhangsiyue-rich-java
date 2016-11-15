@@ -5,7 +5,6 @@ import rich.Status;
 
 public interface Command {
 
-    Status execute(Commander player);
+    Status execute(Commander player, String parameter);
 
-    Status respond(Commander player, Response response, String parameter);
 }

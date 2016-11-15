@@ -42,7 +42,7 @@ public class RollToMineTest {
     public void should_end_turn_and_gain_points_after_roll_to_mine() throws Exception {
         Player player = Player.createPlayerWithPoints(starting, 0);
 
-        player.executeCommand(rollCommand);
+        player.executeCommand(rollCommand, "");
 
         assertThat(player.getStatus(), is(Status.END_TURN));
         assertThat(player.getPoints(), is(GAIN_POINTS));

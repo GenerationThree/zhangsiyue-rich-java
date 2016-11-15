@@ -44,7 +44,7 @@ public class RollToOtherEstateTest {
     public void should_end_turn_when_roll_to_other_estate() throws Exception {
         Player player = Player.createPlayerWithBalanceAndEstate(starting, INIT_BALANCE);
 
-        player.executeCommand(rollCommand);
+        player.executeCommand(rollCommand, "");
 
         assertThat(player.getStatus(), is(Status.END_TURN));
     }
@@ -54,7 +54,7 @@ public class RollToOtherEstateTest {
         final double fee = otherEstate.getPrice() * otherEstate.getLevel().getFeeTimes();
         Player player = Player.createPlayerWithBalanceAndEstate(starting, INIT_BALANCE);
 
-        player.executeCommand(rollCommand);
+        player.executeCommand(rollCommand, "");
 
         assertThat(player.getBalance(), is(INIT_BALANCE - fee));
         assertThat(otherPlayer.getBalance(), is(INIT_BALANCE + fee));
@@ -65,7 +65,7 @@ public class RollToOtherEstateTest {
         final double fee = otherEstate.getPrice() * otherEstate.getLevel().getFeeTimes();
         Player player = Player.createPlayerWithBalanceAndEstate(starting, fee - 1);
 
-        player.executeCommand(rollCommand);
+        player.executeCommand(rollCommand, "");
 
         assertThat(player.getStatus(), is(Status.END_GAME));
     }

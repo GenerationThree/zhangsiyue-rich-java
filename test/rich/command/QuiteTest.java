@@ -13,7 +13,7 @@ public class QuiteTest {
         Command quiteCommand = new QuiteCommand();
         Player player = new Player(1, 0);
 
-        player.executeCommand(quiteCommand);
+        player.executeCommand(quiteCommand, "");
 
         assertThat(player.getStatus(), is(Status.END_GAME));
     }

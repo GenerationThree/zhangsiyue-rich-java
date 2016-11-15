@@ -42,7 +42,7 @@ public class UseToolTest {
         player.buyTool(1);
         int preToolSum = player.getTools().size();
 
-        player.executeCommand(useToolCommand);
+        player.executeCommand(useToolCommand, "");
 
         assertThat(player.getStatus(), is(Status.WAIT_COMMAND));
         assertThat(player.getTools().size(), is(preToolSum - 1));

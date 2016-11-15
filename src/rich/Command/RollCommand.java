@@ -20,7 +20,7 @@ public class RollCommand implements Command {
     }
 
     @Override
-    public Status execute(Commander commander) {
+    public Status execute(Commander commander, String parameter) {
         Player player = (Player)commander;
         Place target = map.move(player.getCurrentPlace(), dice.next());
         Tool tool = map.getTool(target);
@@ -39,42 +39,37 @@ public class RollCommand implements Command {
         return target.arrive(player);
     }
 
-    @Override
-    public Status respond(Commander commander, Response response, String parameter) {
-        return response.execute(((Player)commander), parameter);
-    }
-
-    public static Response YesToBuy = (player, parameter) -> {
-        player.buy();
+    public static Command YesToBuy = (player, parameter) -> {
+        ((Player)player).buy();
         return Status.END_TURN;
     };
 
-    public static Response NoToBuy = (player, parameter) -> Status.END_TURN;
+    public static Command NoToBuy = (player, parameter) -> Status.END_TURN;
 
-    public static Response YesToPromote = (player, parameter) -> {
-        player.promoteEstate();
+    public static Command YesToPromote = (player, parameter) -> {
+        ((Player)player).promoteEstate();
         return Status.END_TURN;
     };
 
-    public static Response NoToPromote = (player, parameter) -> Status.END_TURN;
+    public static Command NoToPromote = (player, parameter) -> Status.END_TURN;
 
-    public static Response BuyToll = (player, parameter) -> {
+    public static Command BuyToll = (player, parameter) -> {
         int choice = Integer.valueOf(parameter);
-        player.buyTool(choice);
-        if (player.getPoints() >= ToolHouse.POINT_LIMIT)
+        ((Player)player).buyTool(choice);
+        if (((Player)player).getPoints() >= ToolHouse.POINT_LIMIT)
             return Status.WAIT_RESPONSE;
         else
             return Status.END_TURN;
     };
 
-    public static Response QuiteToolHouse = (player, parameter) -> Status.END_TURN;
+    public static Command QuiteToolHouse = (player, parameter) -> Status.END_TURN;
 
-    public static Response SelectGift = (player, parameter) -> {
+    public static Command SelectGift = (player, parameter) -> {
         int choice = Integer.valueOf(parameter);
-        player.selectGift(choice);
+        ((Player)player).selectGift(choice);
         return Status.END_TURN;
     };
 
-    public static Response UseMagic = ((player, parameter) -> Status.END_TURN);
+    public static Command UseMagic = ((player, parameter) -> Status.END_TURN);
 
 }
