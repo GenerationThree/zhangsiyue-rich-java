@@ -15,6 +15,5 @@ public class MineTest {
 
         assertThat(mine.arrive(player), is(Player.Status.END_TURN));
         assertThat(player.getPoints(), is(gainPoints));
-
     }
 }
