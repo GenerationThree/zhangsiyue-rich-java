@@ -74,12 +74,7 @@ public class Player implements Commander {
     }
 
     @Override
-    public void executeCommand(Command command, String parameter) {
-        status = command.execute(this, "");
-        lastExecuted = command;
-    }
-
-    public void respond(Command response, String parameter) {
+    public void execute(Command response, String parameter) {
         status = response.execute(this, parameter);
     }
 

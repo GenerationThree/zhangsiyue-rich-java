@@ -42,7 +42,7 @@ public class RollToEmptyTest {
     public void should_be_wait_response_after_roll_to_empty() throws Exception {
         Player player = Player.createPlayerWithStarting(starting);
 
-        player.executeCommand(rollCommand, "");
+        player.execute(rollCommand, "");
 
         assertThat(player.getStatus(), is(Status.WAIT_RESPONSE));
     }
@@ -55,9 +55,9 @@ public class RollToEmptyTest {
 
         Player player = Player.createPlayerWithBalanceAndEstate(starting, IN_BALANCE);
 
-        player.executeCommand(rollCommand, "");
+        player.execute(rollCommand, "");
 
-        player.respond(rollCommand.YesToBuy, "");
+        player.execute(rollCommand.YesToBuy, "");
         assertThat(player.getStatus(), is(Status.END_TURN));
     }
 
@@ -69,9 +69,9 @@ public class RollToEmptyTest {
 
         Player player = Player.createPlayerWithBalanceAndEstate(starting, INIT_BALANCE);
 
-        player.executeCommand(rollCommand, "");
+        player.execute(rollCommand, "");
 
-        player.respond(rollCommand.YesToBuy, "");
+        player.execute(rollCommand.YesToBuy, "");
         assertThat(player.getEstates().size(), is(1));
         assertThat(player.getBalance(), is(INIT_BALANCE - IN_BALANCE));
     }
@@ -84,9 +84,9 @@ public class RollToEmptyTest {
 
         Player player = Player.createPlayerWithBalanceAndEstate(starting, INIT_BALANCE);
 
-        player.executeCommand(rollCommand, "");
+        player.execute(rollCommand, "");
 
-        player.respond(rollCommand.NoToBuy, "");
+        player.execute(rollCommand.NoToBuy, "");
         assertThat(player.getStatus(), is(Status.END_TURN));
         assertThat(player.getEstates().size(), is(0));
         assertThat(player.getBalance(), is(INIT_BALANCE));

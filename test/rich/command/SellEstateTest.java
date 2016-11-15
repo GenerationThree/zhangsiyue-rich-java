@@ -34,7 +34,7 @@ public class SellEstateTest {
         double preBalance = player.getBalance();
         int preEstateNum = player.getEstates().size();
 
-        player.executeCommand(sellCommand, "");
+        player.execute(sellCommand, "");
 
         assertThat(player.getBalance(), is(preBalance + estate.getPrice() * 2 *(level.ordinal() + 1)));
         assertThat(player.getStatus(), is(Status.WAIT_COMMAND));

@@ -40,7 +40,7 @@ public class RollToMagicHouseTest {
     public void should_wait_response_when_roll_to_magic_house() throws Exception {
         Player player = Player.createPlayerWithStarting(starting);
 
-        player.executeCommand(rollCommand, "");
+        player.execute(rollCommand, "");
 
         assertThat(player.getStatus(), is(Status.WAIT_RESPONSE));
     }
@@ -49,9 +49,9 @@ public class RollToMagicHouseTest {
     public void should_end_turn_after_response_at_magicHouse() throws Exception {
         Player player = Player.createPlayerWithStarting(starting);
 
-        player.executeCommand(rollCommand, "");
+        player.execute(rollCommand, "");
 
-        player.respond(rollCommand.UseMagic, "");
+        player.execute(rollCommand.UseMagic, "");
 
         assertThat(player.getStatus(), is(Status.END_TURN));
 
