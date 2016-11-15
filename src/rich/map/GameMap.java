@@ -73,7 +73,7 @@ public class GameMap implements Map {
     }
 
     @Override
-    public void useTool(Place current, int distance, Tool.Type type) {
+    public boolean useTool(Place current, int distance, Tool.Type type) {
         int currentPosition = places.indexOf(current);
         if (type == Tool.Type.ROBOT) {
             for (int i = 1; i <= distance; i++) {
@@ -82,7 +82,7 @@ public class GameMap implements Map {
                     toolSetList.remove(targetPosition);
                 }
             }
-            return;
+            return true;
         }
         int length = places.size();
         int targetPosition = distance + currentPosition;
@@ -90,9 +90,12 @@ public class GameMap implements Map {
         targetPosition = targetPosition < 0 ? targetPosition % length + length : targetPosition % length;
         for (Player player : gameControl.getPlayers()){
             if(player.getCurrentPlace().equals(places.get(targetPosition)))
-                return;
+                return false;
         }
-        if (toolSetList.getOrDefault(targetPosition, null) == null )
+        if (toolSetList.getOrDefault(targetPosition, null) == null ) {
             toolSetList.put(targetPosition, new Tool(type));
+            return true;
+        }
+        return false;
     }
 }

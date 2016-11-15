@@ -1,5 +1,6 @@
 package rich.map;
 
+import org.junit.Before;
 import org.junit.Test;
 import rich.GameControl.GameControl;
 import rich.Player;
@@ -16,6 +17,14 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class MapTest {
+    private GameControl gameControl;
+
+    @Before
+    public void setUp() throws Exception {
+        gameControl = mock(GameControl.class);
+        when(gameControl.getPlayers()).thenReturn(new ArrayList<>());
+    }
+
     @Test
     public void should_return_target_place_when_move() throws Exception {
         Place startPoint = mock(Place.class);
@@ -43,8 +52,9 @@ public class MapTest {
         Place other = mock(Place.class);
         Place target = mock(Place.class);
         Map map = new GameMap(current, other, target);
+        map.putInGame(gameControl);
 
-        map.useTool(current, -1, Tool.Type.BLOCK);
+        assertThat(map.useTool(current, -1, Tool.Type.BLOCK), is(true));
 
         assertThat(map.getTool(target).getType(), is(Tool.Type.BLOCK));
     }
@@ -55,6 +65,7 @@ public class MapTest {
         Place other = mock(Place.class);
         Place target = mock(Place.class);
         Map map = new GameMap(current, target, other);
+        map.putInGame(gameControl);
 
         map.useTool(current, 1, Tool.Type.BLOCK);
         map.useTool(current, 2, Tool.Type.BOMB);
@@ -71,19 +82,19 @@ public class MapTest {
         Place other = mock(Place.class);
         Place target = mock(Place.class);
         Map map = new GameMap(current, target, other);
+        map.putInGame(gameControl);
 
-        map.useTool(current, 1, Tool.Type.BLOCK);
-        map.useTool(current, 1, Tool.Type.BOMB);
+        assertThat(map.useTool(current, 1, Tool.Type.BLOCK), is(true));
+        assertThat(map.useTool(current, 1, Tool.Type.BOMB), is(false));
 
         assertThat(map.getTool(target).getType(), is(Tool.Type.BLOCK));
     }
 
     @Test
-    public void should_not_set_tool_at_palce_wuth_player() throws Exception {
+    public void should_not_set_tool_at_place_with_player() throws Exception {
         Place current = mock(Place.class);
         Place other = mock(Place.class);
         Place target = mock(Place.class);
-        GameControl gameControl = mock(GameControl.class);
         Player otherPlayer = Player.createPlayerWithStarting(target);
         when(gameControl.getPlayers()).thenReturn(new ArrayList<Player>(){{
             add(otherPlayer);
@@ -91,7 +102,7 @@ public class MapTest {
         Map map = new GameMap(current, target, other);
         map.putInGame(gameControl);
 
-        map.useTool(current, 1, Tool.Type.BLOCK);
+        assertThat(map.useTool(current, 1, Tool.Type.BLOCK), is(false));
         assertThat(map.getTool(target), nullValue());
     }
 }
