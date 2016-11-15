@@ -152,6 +152,18 @@ public class Player {
         }
     }
 
+    public void sellTool(Tool.Type type){
+        Tool tool = tools
+                .stream()
+                .filter(t -> t.getType().equals(type))
+                .findFirst()
+                .orElse(null);
+        if( tool != null){
+            tools.remove(tool);
+            points += tool.getPointPrice();
+        }
+    }
+
     public Status getStatus() {
         return status;
     }

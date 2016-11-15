@@ -204,4 +204,29 @@ public class PlayerActionTest {
         assertThat(player.getEstates().size(), is(0));
         assertThat(player.getBalance(), is(INIT_BALANCE));
     }
+
+    @Test
+    public void should_add_points_and_remove_tool_when_player_sell_tool() throws Exception {
+        Place current = mock(Place.class);
+        Player player = Player.createPlayerWithPoints(current, 100);
+        player.buyTool(1);
+        int prePoints = player.getPoints();
+        int preToolSum = player.getTools().size();
+
+        player.sellTool(Tool.Type.BLOCK);
+
+        assertThat(player.getTools().size(), is(preToolSum - 1));
+        assertThat(player.getPoints(), is(prePoints + Tool.Type.BLOCK.getPointPrice()));
+    }
+
+    @Test
+    public void should_not_sell_when_player_not_have_specified_tool() throws Exception {
+        Place current = mock(Place.class);
+        Player player = Player.createPlayerWithPoints(current, 100);
+
+        player.sellTool(Tool.Type.BLOCK);
+
+        assertThat(player.getTools().size(), is(0));
+        assertThat(player.getPoints(), is(100));
+    }
 }
