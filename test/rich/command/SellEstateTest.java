@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import rich.Player;
 import rich.Status;
+import rich.command.command.SellCommand;
 import rich.map.GameMap;
 import rich.map.Map;
 import rich.place.Estate;
@@ -34,7 +35,7 @@ public class SellEstateTest {
         double preBalance = player.getBalance();
         int preEstateNum = player.getEstates().size();
 
-        player.execute(sellCommand, "");
+        player.execute(sellCommand);
 
         assertThat(player.getBalance(), is(preBalance + estate.getPrice() * 2 *(level.ordinal() + 1)));
         assertThat(player.getStatus(), is(Status.WAIT_COMMAND));

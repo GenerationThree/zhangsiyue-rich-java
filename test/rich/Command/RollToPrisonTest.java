@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import rich.Dice;
 import rich.Status;
+import rich.command.command.RollCommand;
 import rich.map.Map;
 import rich.place.Place;
 import rich.place.Prison;
@@ -39,7 +40,7 @@ public class RollToPrisonTest {
     public void should_end_turn_when_roll_to_prison() throws Exception {
         Player player = Player.createPlayerWithStarting(starting);
 
-        player.execute(rollCommand, "");
+        player.execute(rollCommand);
 
         assertThat(player.getStatus(), is(Status.END_TURN));
         assertThat(player.getWaitTurn(), is(Prison.WAIT_TURN));

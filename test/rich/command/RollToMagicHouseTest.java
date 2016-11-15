@@ -5,6 +5,8 @@ import org.junit.Test;
 import rich.Dice;
 import rich.Player;
 import rich.Status;
+import rich.command.command.RollCommand;
+import rich.command.response.UseMagicResponse;
 import rich.map.Map;
 import rich.place.MagicHouse;
 import rich.place.Place;
@@ -40,7 +42,7 @@ public class RollToMagicHouseTest {
     public void should_wait_response_when_roll_to_magic_house() throws Exception {
         Player player = Player.createPlayerWithStarting(starting);
 
-        player.execute(rollCommand, "");
+        player.execute(rollCommand);
 
         assertThat(player.getStatus(), is(Status.WAIT_RESPONSE));
     }
@@ -49,9 +51,9 @@ public class RollToMagicHouseTest {
     public void should_end_turn_after_response_at_magicHouse() throws Exception {
         Player player = Player.createPlayerWithStarting(starting);
 
-        player.execute(rollCommand, "");
+        player.execute(rollCommand);
 
-        player.execute(rollCommand.UseMagic, "");
+        player.execute(new UseMagicResponse());
 
         assertThat(player.getStatus(), is(Status.END_TURN));
 

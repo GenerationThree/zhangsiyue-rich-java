@@ -5,7 +5,6 @@ import rich.map.Map;
 import rich.place.Estate;
 import rich.place.Hospital;
 import rich.place.Place;
-import rich.command.Response;
 import rich.place.Prison;
 import rich.tool.Tool;
 
@@ -74,8 +73,8 @@ public class Player implements Commander {
     }
 
     @Override
-    public void execute(Command response, String parameter) {
-        status = response.execute(this, parameter);
+    public void execute(Command response) {
+        status = response.execute(this);
     }
 
     public void moveTo(Place place) {

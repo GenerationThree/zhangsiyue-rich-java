@@ -4,6 +4,9 @@ import org.junit.Before;
 import org.junit.Test;
 import rich.Dice;
 import rich.Status;
+import rich.command.command.RollCommand;
+import rich.command.response.NoToPromoteResponse;
+import rich.command.response.YesToPromoteResponse;
 import rich.map.Map;
 import rich.place.Estate;
 import rich.place.Place;
@@ -43,7 +46,7 @@ public class RollToOwnedEstateTest {
         Player player = Player.createPlayerWithBalanceAndEstate(starting, INIT_BALANCE, estate);
         when(estate.arrive(player)).thenReturn(Status.WAIT_RESPONSE);
 
-        player.execute(rollCommand, "");
+        player.execute(rollCommand);
 
         assertThat(player.getStatus(), is(Status.WAIT_RESPONSE));
     }
@@ -53,8 +56,8 @@ public class RollToOwnedEstateTest {
         Player player = Player.createPlayerWithBalanceAndEstate(starting, INIT_BALANCE, estate);
         when(estate.getOwner()).thenReturn(player);
 
-        player.execute(rollCommand, "");
-        player.execute(rollCommand.YesToPromote, "");
+        player.execute(rollCommand);
+        player.execute(new YesToPromoteResponse());
 
         assertThat(player.getStatus(), is(Status.END_TURN));
     }
@@ -66,8 +69,8 @@ public class RollToOwnedEstateTest {
         when(estate.promote()).thenReturn(true);
         when(estate.getPrice()).thenReturn(IN_BALANCE);
 
-        player.execute(rollCommand, "");
-        player.execute(rollCommand.YesToPromote, "");
+        player.execute(rollCommand);
+        player.execute(new YesToPromoteResponse());
 
         assertThat(player.getBalance(), is(INIT_BALANCE - IN_BALANCE));
     }
@@ -79,8 +82,8 @@ public class RollToOwnedEstateTest {
         when(estate.promote()).thenReturn(false);
         when(estate.getPrice()).thenReturn(IN_BALANCE);
 
-        player.execute(rollCommand, "");
-        player.execute(rollCommand.YesToPromote, "");
+        player.execute(rollCommand);
+        player.execute(new YesToPromoteResponse());
 
         assertThat(player.getBalance(), is(INIT_BALANCE));
     }
@@ -91,8 +94,8 @@ public class RollToOwnedEstateTest {
         when(estate.getOwner()).thenReturn(player);
         when(estate.getPrice()).thenReturn(IN_BALANCE);
 
-        player.execute(rollCommand, "");
-        player.execute(rollCommand.YesToPromote, "");
+        player.execute(rollCommand);
+        player.execute(new YesToPromoteResponse());
 
         assertThat(player.getBalance(), is(IN_BALANCE - 1));
     }
@@ -101,8 +104,8 @@ public class RollToOwnedEstateTest {
     public void should_end_turn_when_say_no_to_promote() throws Exception {
         Player player = Player.createPlayerWithBalanceAndEstate(starting, INIT_BALANCE, estate);
 
-        player.execute(rollCommand, "");
-        player.execute(rollCommand.NoToPromote, "");
+        player.execute(rollCommand);
+        player.execute(new NoToPromoteResponse());
 
         assertThat(player.getBalance(), is(INIT_BALANCE));
 

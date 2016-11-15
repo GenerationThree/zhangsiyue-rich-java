@@ -4,6 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 import rich.Dice;
 import rich.Status;
+import rich.command.command.RollCommand;
+import rich.command.response.SelectGiftResponse;
 import rich.map.Map;
 import rich.place.GiftHouse;
 import rich.place.Place;
@@ -40,7 +42,7 @@ public class RollToGiftHouseTest {
     public void should_wait_response_when_roll_to_gift_house() throws Exception {
         Player player = new Player(1, 0);
 
-        player.execute(rollCommand, "");
+        player.execute(rollCommand);
 
         assertThat(player.getStatus(), is(Status.WAIT_RESPONSE));
     }
@@ -49,18 +51,18 @@ public class RollToGiftHouseTest {
     public void should_end_turn_and_get_right_gift_when_respond_select_gift() throws Exception {
         Player player = new Player(1, 0);
 
-        player.execute(rollCommand, "");
-        player.execute(rollCommand.SelectGift, "1");
+        player.execute(rollCommand);
+        player.execute(new SelectGiftResponse("1"));
 
         assertThat(player.getBalance(), is(Double.valueOf("2000")));
 
-        player.execute(rollCommand, "");
-        player.execute(rollCommand.SelectGift, "2");
+        player.execute(rollCommand);
+        player.execute(new SelectGiftResponse("2"));
 
         assertThat(player.getPoints(), is(200));
 
-        player.execute(rollCommand, "");
-        player.execute(rollCommand.SelectGift, "3");
+        player.execute(rollCommand);
+        player.execute(new SelectGiftResponse("3"));
 
         assertThat(player.getFreeTurns(), is(5));
     }

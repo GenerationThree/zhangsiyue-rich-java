@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import rich.Dice;
 import rich.Status;
+import rich.command.command.RollCommand;
 import rich.map.Map;
 import rich.place.Estate;
 import rich.place.Place;
@@ -44,7 +45,7 @@ public class RollToOtherEstateTest {
     public void should_end_turn_when_roll_to_other_estate() throws Exception {
         Player player = Player.createPlayerWithBalanceAndEstate(starting, INIT_BALANCE);
 
-        player.execute(rollCommand, "");
+        player.execute(rollCommand);
 
         assertThat(player.getStatus(), is(Status.END_TURN));
     }
@@ -54,7 +55,7 @@ public class RollToOtherEstateTest {
         final double fee = otherEstate.getPrice() * otherEstate.getLevel().getFeeTimes();
         Player player = Player.createPlayerWithBalanceAndEstate(starting, INIT_BALANCE);
 
-        player.execute(rollCommand, "");
+        player.execute(rollCommand);
 
         assertThat(player.getBalance(), is(INIT_BALANCE - fee));
         assertThat(otherPlayer.getBalance(), is(INIT_BALANCE + fee));
@@ -65,7 +66,7 @@ public class RollToOtherEstateTest {
         final double fee = otherEstate.getPrice() * otherEstate.getLevel().getFeeTimes();
         Player player = Player.createPlayerWithBalanceAndEstate(starting, fee - 1);
 
-        player.execute(rollCommand, "");
+        player.execute(rollCommand);
 
         assertThat(player.getStatus(), is(Status.END_GAME));
     }

@@ -4,6 +4,9 @@ import org.junit.Before;
 import org.junit.Test;
 import rich.Dice;
 import rich.Status;
+import rich.command.command.RollCommand;
+import rich.command.response.BuyToolResponse;
+import rich.command.response.QuiteToolHouseResponse;
 import rich.map.Map;
 import rich.place.Place;
 import rich.place.ToolHouse;
@@ -41,7 +44,7 @@ public class RollToToolHouseTest {
     public void should_wait_response_when_arrive_tool_house() throws Exception {
         Player player = Player.createPlayerWithPoints(toolHouse, 100);
 
-        player.execute(rollCommand, "");
+        player.execute(rollCommand);
 
         assertThat(player.getStatus(), is(Status.WAIT_RESPONSE));
     }
@@ -50,7 +53,7 @@ public class RollToToolHouseTest {
     public void should_end_turn_when_arrive_tool_house_without_enough_points() throws Exception {
         Player player = Player.createPlayerWithPoints(toolHouse, ToolHouse.POINT_LIMIT - 1);
 
-        player.execute(rollCommand, "");
+        player.execute(rollCommand);
 
         assertThat(player.getStatus(), is(Status.END_TURN));
     }
@@ -59,9 +62,9 @@ public class RollToToolHouseTest {
     public void should_wait_response_when_respond_buy_tool_at_tool_house() throws Exception {
         Player player = Player.createPlayerWithPoints(toolHouse, 100);
 
-        player.execute(rollCommand, "");
+        player.execute(rollCommand);
 
-        player.execute(rollCommand.BuyToll, "1");
+        player.execute(new BuyToolResponse("1"));
 
         assertThat(player.getStatus(), is(Status.WAIT_RESPONSE));
         assertThat(player.getPoints(), is(100 - Tool.Type.BLOCK.getPointPrice()));
@@ -71,9 +74,9 @@ public class RollToToolHouseTest {
     public void should_end_turn_when_after_respond_buy_tool_at_tool_house_without_enough_points() throws Exception {
         Player player = Player.createPlayerWithPoints(toolHouse, ToolHouse.POINT_LIMIT + Tool.Type.BLOCK.getPointPrice() -1);
 
-        player.execute(rollCommand, "");
+        player.execute(rollCommand);
 
-        player.execute(rollCommand.BuyToll, "1");
+        player.execute(new BuyToolResponse("1"));
 
         assertThat(player.getStatus(), is(Status.END_TURN));
     }
@@ -82,9 +85,9 @@ public class RollToToolHouseTest {
     public void should_end_turn_when_quite_tool_house() throws Exception {
         Player player = Player.createPlayerWithPoints(toolHouse, 100);
 
-        player.execute(rollCommand, "");
+        player.execute(rollCommand);
 
-        player.execute(rollCommand.QuiteToolHouse, "");
+        player.execute(new QuiteToolHouseResponse());
 
         assertThat(player.getStatus(), is(Status.END_TURN));
 

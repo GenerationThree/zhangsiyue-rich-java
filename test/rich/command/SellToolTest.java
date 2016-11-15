@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import rich.Player;
 import rich.Status;
+import rich.command.command.SellToolCommand;
 import rich.place.Place;
 import rich.tool.Tool;
 
@@ -31,7 +32,7 @@ public class SellToolTest {
         int prePoints = player.getPoints();
         int preToolSum = player.getTools().size();
 
-        player.execute(sellToolCommand, "");
+        player.execute(sellToolCommand);
 
         assertThat(player.getStatus(), is(Status.WAIT_COMMAND));
         assertThat(player.getPoints(), is(prePoints + Tool.Type.BLOCK.getPointPrice()));
@@ -46,7 +47,7 @@ public class SellToolTest {
         int preToolSum = player.getTools().size();
         sellToolCommand = new SellToolCommand(4);
 
-        player.execute(sellToolCommand, "");
+        player.execute(sellToolCommand);
 
         assertThat(player.getStatus(), is(Status.WAIT_COMMAND));
         assertThat(player.getPoints(), is(prePoints));

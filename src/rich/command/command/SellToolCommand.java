@@ -1,8 +1,9 @@
-package rich.command;
+package rich.command.command;
 
 import rich.Commander;
 import rich.Player;
 import rich.Status;
+import rich.command.Command;
 import rich.tool.Tool;
 
 public class SellToolCommand implements Command {
@@ -13,7 +14,7 @@ public class SellToolCommand implements Command {
     }
 
     @Override
-    public Status execute(Commander player, String parameter) {
+    public Status execute(Commander player) {
         Tool.Type[] toolTypes = Tool.Type.values();
         if (choice >= 1 && choice <= toolTypes.length) {
             Tool.Type type = toolTypes[choice - 1];

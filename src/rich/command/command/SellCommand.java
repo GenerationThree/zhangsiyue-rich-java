@@ -1,12 +1,13 @@
-package rich.command;
+package rich.command.command;
 
 import rich.Commander;
 import rich.Player;
 import rich.Status;
+import rich.command.Command;
 import rich.map.Map;
 import rich.place.Place;
 
-public class SellCommand implements Command{
+public class SellCommand implements Command {
     private Map map;
     private int position;
 
@@ -17,7 +18,7 @@ public class SellCommand implements Command{
 
 
     @Override
-    public Status execute(Commander player, String parameter) {
+    public Status execute(Commander player) {
         Place target = map.findPlace(position);
         ((Player)player).sellEstate(target);
         return Status.WAIT_COMMAND;

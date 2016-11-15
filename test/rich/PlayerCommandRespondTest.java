@@ -24,54 +24,54 @@ public class PlayerCommandRespondTest {
 
     @Test
     public void should_be_wait_command_after_execute_command_not_need_respond() throws Exception {
-        when(command.execute(eq(player), any())).thenReturn(Status.WAIT_COMMAND);
+        when(command.execute(eq(player))).thenReturn(Status.WAIT_COMMAND);
 
-        player.execute(command, "");
+        player.execute(command);
 
         assertThat(player.getStatus(), is(Status.WAIT_COMMAND));
     }
 
     @Test
     public void should_wait_response_after_execute_command_need_response() throws Exception {
-        when(command.execute(eq(player), any())).thenReturn(Status.WAIT_RESPONSE);
+        when(command.execute(eq(player))).thenReturn(Status.WAIT_RESPONSE);
 
-        player.execute(command, "");
+        player.execute(command);
 
         assertThat(player.getStatus(), is(Status.WAIT_RESPONSE));
     }
 
     @Test
     public void should_be_end_turn_after_execute_command() throws Exception {
-        when(command.execute(eq(player), any())).thenReturn(Status.END_TURN);
+        when(command.execute(eq(player))).thenReturn(Status.END_TURN);
 
-        player.execute(command, "");
+        player.execute(command);
 
         assertThat(player.getStatus(), is(Status.END_TURN));
     }
 
     @Test
     public void should_be_end_turn_after_respond() throws Exception {
-        when(command.execute(eq(player), any())).thenReturn(Status.WAIT_RESPONSE);
+        when(command.execute(eq(player))).thenReturn(Status.WAIT_RESPONSE);
 
-        player.execute(command, "");
+        player.execute(command);
 
-        when(response.execute(eq(player), any())).thenReturn(Status.END_TURN);
+        when(response.execute(eq(player))).thenReturn(Status.END_TURN);
 
-        player.execute(response, "");
+        player.execute(response);
 
         assertThat(player.getStatus(), is(Status.END_TURN));
     }
 
     @Test
     public void should_be_wait_response_after_respond() throws Exception {
-        when(command.execute(eq(player), any())).thenReturn(Status.WAIT_RESPONSE);
+        when(command.execute(eq(player))).thenReturn(Status.WAIT_RESPONSE);
 
-        player.execute(command, "");
+        player.execute(command);
 
-        when(response.execute(eq(player), any())).thenReturn(Status.WAIT_RESPONSE);
+        when(response.execute(eq(player))).thenReturn(Status.WAIT_RESPONSE);
 
 
-        player.execute(response, "");
+        player.execute(response);
 
         assertThat(player.getStatus(), is(Status.WAIT_RESPONSE));
     }

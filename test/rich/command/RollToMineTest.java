@@ -5,6 +5,7 @@ import org.junit.Test;
 import rich.Dice;
 import rich.Player;
 import rich.Status;
+import rich.command.command.RollCommand;
 import rich.map.Map;
 import rich.place.Mine;
 import rich.place.Place;
@@ -42,7 +43,7 @@ public class RollToMineTest {
     public void should_end_turn_and_gain_points_after_roll_to_mine() throws Exception {
         Player player = Player.createPlayerWithPoints(starting, 0);
 
-        player.execute(rollCommand, "");
+        player.execute(rollCommand);
 
         assertThat(player.getStatus(), is(Status.END_TURN));
         assertThat(player.getPoints(), is(GAIN_POINTS));

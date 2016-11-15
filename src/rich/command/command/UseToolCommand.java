@@ -1,8 +1,9 @@
-package rich.command;
+package rich.command.command;
 
 import rich.Commander;
 import rich.Player;
 import rich.Status;
+import rich.command.Command;
 import rich.map.Map;
 import rich.tool.Tool;
 
@@ -18,7 +19,7 @@ public class UseToolCommand implements Command {
     }
 
     @Override
-    public Status execute(Commander player, String parameter) {
+    public Status execute(Commander player) {
         ((Player)player).useTool(map, distance, type);
         return Status.WAIT_COMMAND;
     }
