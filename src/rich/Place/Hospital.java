@@ -1,5 +1,6 @@
 package rich.place;
 
+import rich.Printer;
 import rich.commander.Player;
 import rich.Status;
 

@@ -58,18 +58,18 @@ public class CommandConvertor {
             if(inputContent.length == 1) {
                 if (currentPlace instanceof Estate) {
                     if (((Estate) currentPlace).getOwner() == null) {
-                        if (inputContent[0].equalsIgnoreCase("yes")) {
-                            new YesToBuyResponse();
+                        if (inputContent[0].equalsIgnoreCase("y")) {
+                            return new YesToBuyResponse();
                         }
-                        if (inputContent[0].equalsIgnoreCase("no")) {
-                            new NoToBuyResponse();
+                        if (inputContent[0].equalsIgnoreCase("n")) {
+                            return new NoToBuyResponse();
                         }
                     }
                     if (((Estate) currentPlace).getOwner() == currentPlayer) {
-                        if (inputContent[0].equalsIgnoreCase("yes")) {
-                            new YesToPromoteResponse();
+                        if (inputContent[0].equalsIgnoreCase("y")) {
+                            return new YesToPromoteResponse();
                         }
-                        if (inputContent[0].equalsIgnoreCase("no")) {
+                        if (inputContent[0].equalsIgnoreCase("n")) {
                             new NoToPromoteResponse();
                         }
                     }

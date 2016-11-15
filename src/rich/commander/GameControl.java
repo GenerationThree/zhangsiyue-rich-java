@@ -126,13 +126,16 @@ public class GameControl implements Commander {
 
     public void startGame() {
         players.sort((p1, p2) -> p1.getId() > p2. getId() ? 1 : -1);
+        status = Status.IN_PROGRESS;
     }
 
     public void startTurn() {
         if (currentPlayer == null)
             currentPlayer = players.get(0);
-        int currentIndex = players.indexOf(players);
-        currentPlayer = players.get( (currentIndex + 1) % players.size() );
+        else {
+            int currentIndex = players.indexOf(currentPlayer);
+            currentPlayer = players.get((currentIndex + 1) % players.size());
+        }
         currentPlayer.startTurn();
     }
 

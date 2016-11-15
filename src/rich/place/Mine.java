@@ -1,5 +1,6 @@
 package rich.place;
 
+import rich.Printer;
 import rich.commander.Player;
 import rich.Status;
 
@@ -13,6 +14,7 @@ public class Mine implements Place {
     @Override
     public Status arrive(Player player) {
         player.gainPoints(points);
+        Printer.printMessage("采矿获得点数" + points +"点 :) ");
         return Status.END_TURN;
     }
 }

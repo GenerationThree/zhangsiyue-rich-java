@@ -1,11 +1,8 @@
 package rich;
 
-import rich.commander.GameControl;
 import rich.commander.Player;
 import rich.map.Map;
 import rich.place.*;
-
-import java.util.List;
 
 public class Printer {
 
@@ -54,5 +51,31 @@ public class Printer {
         for (int i = 0; i < 29; i++)
             System.out.print(mapImage.charAt(63 - i));
         System.out.println();
+    }
+
+    public static void printCurrentPlayerInfo(Player currentPlayer) {
+        if (currentPlayer.getStatus() != Status.LOSE_GAME) {
+            System.out.print(currentPlayer.getName());
+
+            if (currentPlayer.getFreeTurns() > -1) {
+                System.out.print(("(福神附身 :) )"));
+            }
+            System.out.print("->");
+            if(currentPlayer.getStatus() == Status.END_TURN)
+                System.out.println("End Turn");
+            int waitTurn = currentPlayer.getWaitTurn();
+            if (waitTurn > 0) {
+                if (currentPlayer.getCurrentPlace() instanceof Hospital) {
+                    System.out.println("你还需要住院" + waitTurn + "天 TOT");
+                }
+                if (currentPlayer.getCurrentPlace() instanceof Prison) {
+                    System.out.println("你还需要服刑" + waitTurn + "天 TOT");
+                }
+            }
+        }
+    }
+
+    public static void printMessage(String message){
+        System.out.println(message);
     }
 }

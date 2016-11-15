@@ -1,5 +1,6 @@
 package rich.place;
 
+import rich.Printer;
 import rich.commander.Player;
 import rich.Status;
 
@@ -56,13 +57,18 @@ public class Estate implements Place {
 
     @Override
     public Status arrive(Player player) {
-        if (owner == null || owner == player)
+        if (owner == null || owner == player) {
+            Printer.printMessage("是否购买该处空地，" + price + "元（Y/N）?");
             return Status.WAIT_RESPONSE;
+        }
         else {
-            if (player.payFee())
+            if (player.payFee()) {
                 return Status.END_TURN;
-            else
+            }
+            else {
+                Printer.printMessage("破产啦 TOT");
                 return Status.LOSE_GAME;
+            }
         }
     }
 

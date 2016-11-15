@@ -1,5 +1,6 @@
 package rich.commander;
 
+import rich.Printer;
 import rich.Status;
 import rich.command.Command;
 import rich.map.Map;
@@ -104,7 +105,7 @@ public class Player implements Commander {
     }
 
     public void startTurn(){
-        if(waitTurn == 0 && status == Status.END_TURN){
+        if(waitTurn == -1 && status == Status.END_TURN){
             status = Status.WAIT_COMMAND;
         }
         if(freeTurns >= 0)
@@ -127,24 +128,31 @@ public class Player implements Commander {
         if (balance >= estate.getPrice() && estate.buy(this)) {
             balance -= ((Estate) currentPlace).getPrice();
             estates.add(currentPlace);
+            Printer.printMessage("购得地产 :) ");
+            return;
         }
+        Printer.printMessage("余额不足 :( ");
     }
 
     public void promoteEstate() {
         Estate estate = ((Estate) currentPlace);
-        if (balance >= estate.getPrice() && estate.promote())
+        if (balance >= estate.getPrice() && estate.promote()) {
             balance -= estate.getPrice();
+            Printer.printMessage("升级地产,花费" + estate.getPrice() + "元");
+        }
     }
 
     public boolean payFee() {
         Estate estate = (Estate) currentPlace;
         if (freeTurns >= 0 || estate.getOwner().getCurrentPlace() instanceof Hospital || estate.getOwner().getCurrentPlace() instanceof Prison) {
+            Printer.printMessage("免过路费 :) ");
             return true;
         }
         double fee = estate.getPrice() * estate.getLevel().getFeeTimes();
         if (balance >= fee) {
             balance -= fee;
             ((Estate) currentPlace).getOwner().gainFee(fee);
+            Printer.printMessage("交过路费" + fee + "元 :( ");
             return true;
         }
         return false;
@@ -155,6 +163,7 @@ public class Player implements Commander {
     }
 
     public void inPrison(int waitTurn) {
+        Printer.printMessage("服刑两天 :( ");
         this.waitTurn = waitTurn;
     }
 
@@ -162,6 +171,7 @@ public class Player implements Commander {
         if (tools.size() < 10 && points >= Tool.Type.values()[choice - 1].getPointPrice()) {
             tools.add(new Tool(Tool.Type.values()[choice - 1]));
             points -= Tool.Type.values()[choice - 1].getPointPrice();
+            Printer.printMessage("购买道具");
         }
     }
 
@@ -182,6 +192,7 @@ public class Player implements Commander {
     }
 
     public void goToHospital(Hospital hospital){
+        Printer.printMessage("住院三天 :( ");
         currentPlace = hospital;
         waitTurn = 3;
     }
@@ -194,8 +205,10 @@ public class Player implements Commander {
         if (target instanceof Estate){
             Estate estate = (Estate)target;
             if(estate.getOwner() == this){
-                balance += estate.sell();
+                double income = estate.sell();
+                balance += income;
                 estates.remove(estate);
+                Printer.printMessage("出售地产, 收入" + income + "元 :) ");
             }
         }
     }
@@ -209,6 +222,7 @@ public class Player implements Commander {
         if( tool != null){
             tools.remove(tool);
             points += tool.getPointPrice();
+            Printer.printMessage("出售道具,增加点数" + tool.getPointPrice() + " :) ");
         }
     }
 
@@ -259,10 +273,8 @@ public class Player implements Commander {
         return id;
     }
 
-
     public String getName() {
         return name;
     }
-
 
 }

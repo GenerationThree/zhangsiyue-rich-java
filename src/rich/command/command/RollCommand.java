@@ -1,5 +1,6 @@
 package rich.command.command;
 
+import rich.Printer;
 import rich.commander.Commander;
 import rich.Dice;
 import rich.Status;
@@ -33,9 +34,11 @@ public class RollCommand implements Command {
                 Hospital hospital = (Hospital) map.findHospital();
                 player.goToHospital(hospital);
                 target = hospital;
+                player.moveTo(target);
             }
         } else
             player.moveTo(target);
+        Printer.printMap(map, player);
         return target.arrive(player);
     }
 

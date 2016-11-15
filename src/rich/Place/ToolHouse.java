@@ -1,5 +1,6 @@
 package rich.place;
 
+import rich.Printer;
 import rich.commander.Player;
 import rich.Status;
 import rich.tool.Tool;
@@ -20,8 +21,11 @@ public class ToolHouse implements Place {
 
     @Override
     public Status arrive(Player player) {
-        if(player.getPoints() < POINT_LIMIT)
+        if(player.getPoints() < POINT_LIMIT) {
+            Printer.printMessage("点数不足, 自动退出道具屋 :(");
             return Status.END_TURN;
+        }
+        Printer.printMessage("欢迎光临道具屋， 请选择您所需要的道具：");
         return Status.WAIT_RESPONSE;
     }
 }
