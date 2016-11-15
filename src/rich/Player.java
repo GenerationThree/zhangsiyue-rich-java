@@ -137,6 +137,10 @@ public class Player {
         waitTurn = 3;
     }
 
+    public void gainPoints(int points){
+        this.points += points;
+    }
+
     public Status getStatus() {
         return status;
     }
