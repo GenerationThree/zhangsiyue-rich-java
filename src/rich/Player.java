@@ -31,8 +31,8 @@ public class Player {
         this.balance = balance;
         status = Status.END_TURN;
         estates = new ArrayList<>();
-        freeTurns = 0;
-        waitTurn = 0;
+        freeTurns = -1;
+        waitTurn = -1;
         points = 0;
         tools = new ArrayList<>();
     }
@@ -61,6 +61,16 @@ public class Player {
         player.currentPlace = starting;
         player.points = points;
         return player;
+    }
+
+    public void startTurn(){
+        if(waitTurn == 0 && status == Status.END_TURN){
+            status = Status.WAIT_COMMAND;
+        }
+        if(freeTurns >= 0)
+            freeTurns --;
+        if(waitTurn >= 0)
+            waitTurn --;
     }
 
     public void executeCommand(Command command) {
@@ -92,7 +102,7 @@ public class Player {
 
     public boolean payFee() {
         Estate estate = (Estate) currentPlace;
-        if (freeTurns > 0 || estate.getOwner().getCurrentPlace() instanceof Hospital || estate.getOwner().getCurrentPlace() instanceof Prison) {
+        if (freeTurns >= 0 || estate.getOwner().getCurrentPlace() instanceof Hospital || estate.getOwner().getCurrentPlace() instanceof Prison) {
             return true;
         }
         double fee = estate.getPrice() * estate.getLevel().getFeeTimes();

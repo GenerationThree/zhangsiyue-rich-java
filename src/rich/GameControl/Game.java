@@ -5,7 +5,11 @@ import rich.Player;
 import rich.map.Map;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static java.util.Arrays.asList;
 
 public class Game implements GameControl {
     private List<Player> players;
@@ -25,6 +29,12 @@ public class Game implements GameControl {
         this.dice = dice;
         currentPlayer = null;
         initBalance = 10000;
+    }
+
+    public static Game createGameWithPlayers(Map map, Dice dice, Player...players){
+        Game game = new Game(map, dice);
+        game.players.addAll(asList(players));
+        return game;
     }
 
     @Override
@@ -47,6 +57,29 @@ public class Game implements GameControl {
         if(player != null)
             throw new Exception("玩家" + id + "已经存在!");
         players.add(new Player(id, initBalance));
+    }
+
+    @Override
+    public void startGame() {
+        Comparator<Player> comparator = (p1, p2) -> p1.getId() > p2. getId() ? 1 : -1;
+        players.sort(comparator);
+    }
+
+    @Override
+    public void startTurn() {
+        if (currentPlayer == null)
+            currentPlayer = players.get(0);
+        int currentIndex = players.indexOf(players);
+        currentPlayer = players.get( (currentIndex + 1) % players.size() );
+        currentPlayer.startTurn();
+    }
+
+    @Override
+    public Player findWinner() {
+        List<Player> survivePlayers = players.stream().filter(player -> player.getStatus() != Player.Status.END_GAME).collect(Collectors.toList());
+        if(survivePlayers.size() == 1)
+            return survivePlayers.get(0);
+        return null;
     }
 
 

@@ -11,4 +11,10 @@ public interface GameControl {
     void setInitBalance(double initBalance) throws Exception;
 
     void addPlayer(int id) throws Exception;
+
+    void startGame();
+
+    void startTurn();
+
+    Player findWinner();
 }
