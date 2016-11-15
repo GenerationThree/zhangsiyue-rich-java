@@ -164,6 +164,10 @@ public class Player {
         }
     }
 
+    public void useTool(Map map, int distance, Tool.Type type){
+
+    }
+
     public Status getStatus() {
         return status;
     }

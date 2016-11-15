@@ -1,5 +1,6 @@
 package rich.map;
 
+import rich.GameControl.GameControl;
 import rich.place.Place;
 import rich.tool.Tool;
 
@@ -13,5 +14,9 @@ public interface Map {
     void removeTool(Place place);
 
     Place findPlace(int position);
+
+    void putInGame(GameControl gameControl);
+
+    void useTool(Place current, int distance, Tool.Type type);
 
 }
