@@ -176,4 +176,32 @@ public class PlayerActionTest {
         assertThat(player.getTools().size(), is(10));
         assertThat(player.getPoints(), is(prePoints));
     }
+
+    @Test
+    public void should_add_balance_when_player_sell_estate() throws Exception {
+        Estate estate = Estate.createEstateWithOwner(IN_BALANCE, null);
+        Player player = Player.createPlayerWithBalanceAndEstate(estate, INIT_BALANCE);
+        player.buy();
+
+        double preBalance = player.getBalance();
+        Estate.Level level = estate.getLevel();
+        assertThat(player.getEstates().size(), is(1));
+        assertThat(preBalance, is(INIT_BALANCE - IN_BALANCE));
+
+        player.sellEstate(estate);
+
+        assertThat(player.getEstates().size(), is(0));
+        assertThat(player.getBalance(), is(preBalance + estate.getPrice() * (level.ordinal() + 1) * 2));
+    }
+
+    @Test
+    public void should_not_add_balance_when_sell_not_owned_estate() throws Exception {
+        Estate estate = Estate.createEstateWithOwner(IN_BALANCE, null);
+        Player player = Player.createPlayerWithBalanceAndEstate(estate, INIT_BALANCE);
+
+        player.sellEstate(estate);
+
+        assertThat(player.getEstates().size(), is(0));
+        assertThat(player.getBalance(), is(INIT_BALANCE));
+    }
 }

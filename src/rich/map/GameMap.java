@@ -57,4 +57,9 @@ public class GameMap implements Map{
     public void removeTool(Place place) {
         tools.remove(places.indexOf(place));
     }
+
+    @Override
+    public Place findPlace(int position) {
+        return places.get(position % places.size());
+    }
 }

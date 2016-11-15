@@ -1,6 +1,7 @@
 package rich;
 
 import rich.command.Command;
+import rich.map.Map;
 import rich.place.Estate;
 import rich.place.Hospital;
 import rich.place.Place;
@@ -139,6 +140,16 @@ public class Player {
 
     public void gainPoints(int points){
         this.points += points;
+    }
+
+    public void sellEstate(Place target){
+        if (target instanceof Estate){
+            Estate estate = (Estate)target;
+            if(estate.getOwner() == this){
+                balance += estate.sell();
+                estates.remove(estate);
+            }
+        }
     }
 
     public Status getStatus() {

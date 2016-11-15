@@ -27,6 +27,12 @@ public class Estate implements Place {
         return false;
     }
 
+    public double sell(){
+        owner = null;
+        level = Level.ZERO;
+        return  price * (level.ordinal() + 1) * 2;
+    }
+
     public Player getOwner() {
         return owner;
     }

@@ -6,9 +6,12 @@ import rich.tool.Tool;
 public interface Map {
     Place move(Place currentPlace, int steps);
 
-    public Tool getTool(Place place);
+    Tool getTool(Place place);
 
-    public Place findHospital();
+    Place findHospital();
 
-    public void removeTool(Place place);
+    void removeTool(Place place);
+
+    Place findPlace(int position);
+
 }
