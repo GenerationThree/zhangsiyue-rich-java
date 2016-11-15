@@ -9,4 +9,6 @@ public interface GameControl {
     List<Player> getPlayers();
 
     void setInitBalance(double initBalance) throws Exception;
+
+    void addPlayer(int id) throws Exception;
 }

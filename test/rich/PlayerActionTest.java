@@ -22,7 +22,7 @@ public class PlayerActionTest {
 
     @Test
     public void should_move_to_specified_place() throws Exception {
-        Player player = new Player();
+        Player player = new Player(1, 0);
         Place destination = mock(Place.class);
 
         player.moveTo(destination);

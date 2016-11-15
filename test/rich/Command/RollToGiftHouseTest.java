@@ -37,7 +37,7 @@ public class RollToGiftHouseTest {
 
     @Test
     public void should_wait_response_when_roll_to_gift_house() throws Exception {
-        Player player = new Player();
+        Player player = new Player(1, 0);
 
         player.executeCommand(rollCommand);
 
@@ -46,7 +46,7 @@ public class RollToGiftHouseTest {
 
     @Test
     public void should_end_turn_and_get_right_gift_when_respond_select_gift() throws Exception {
-        Player player = new Player();
+        Player player = new Player(1, 0);
 
         player.executeCommand(rollCommand);
         player.respond(rollCommand.SelectGift, "1");

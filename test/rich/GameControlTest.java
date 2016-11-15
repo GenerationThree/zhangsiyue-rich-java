@@ -1,5 +1,6 @@
 package rich;
 
+import org.junit.Before;
 import org.junit.Test;
 import rich.GameControl.Game;
 import rich.GameControl.GameControl;
@@ -11,11 +12,17 @@ import static org.mockito.Matchers.contains;
 import static org.mockito.Mockito.mock;
 
 public class GameControlTest {
+    private Map map;
+    private Dice dice;
+
+    @Before
+    public void setUp() throws Exception {
+        map = mock(Map.class);
+        dice = mock(Dice.class);
+    }
+
     @Test
     public void should_fail_when_set_invalid_init_balance() throws Exception {
-        Map map = mock(Map.class);
-        Dice dice = mock(Dice.class);
-
         GameControl gameControl = new Game(map, dice);
 
         try {
@@ -25,5 +32,12 @@ public class GameControlTest {
         }
     }
 
+    @Test
+    public void should_add_player() throws Exception {
+        GameControl gameControl = new Game(map, dice);
 
+        gameControl.addPlayer(2);
+
+        assertThat(gameControl.getPlayers().get(0).getId(), is(2));
+    }
 }

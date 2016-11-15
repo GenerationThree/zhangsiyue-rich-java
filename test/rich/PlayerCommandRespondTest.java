@@ -18,7 +18,7 @@ public class PlayerCommandRespondTest {
 
     @Before
     public void setUp() throws Exception {
-        player = new Player();
+        player = new Player(1, 0);
         command = mock(Command.class);
         response = mock(Response.class);
     }

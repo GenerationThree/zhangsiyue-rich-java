@@ -10,7 +10,7 @@ public class QuiteTest {
     @Test
     public void should_end_game_after_quite_command() throws Exception {
         Command quiteCommand = new QuiteCommand();
-        Player player = new Player();
+        Player player = new Player(1, 0);
 
         player.executeCommand(quiteCommand);
 

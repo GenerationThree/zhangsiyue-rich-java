@@ -15,19 +15,21 @@ import java.util.List;
 import static java.util.Arrays.asList;
 
 public class Player {
+    private int id;
     private Status status;
     private Place currentPlace;
     private double balance;
     private List<Place> estates;
-    Command lastExecuted;
+    private Command lastExecuted;
     private int freeTurns;
     private int waitTurn;
     private int points;
     private List<Tool> tools;
 
-    public Player() {
+    public Player (int id, double balance){
+        this.id = id;
+        this.balance = balance;
         status = Status.END_TURN;
-        balance = 0;
         estates = new ArrayList<>();
         freeTurns = 0;
         waitTurn = 0;
@@ -36,7 +38,7 @@ public class Player {
     }
 
     public static Player createPlayerWithStarting(Place starting) {
-        Player player = new Player();
+        Player player = new Player(1, 0);
         player.currentPlace = starting;
         return player;
     }
@@ -55,7 +57,7 @@ public class Player {
     }
 
     public static Player createPlayerWithPoints(Place starting, int points) {
-        Player player = new Player();
+        Player player = new Player(1, 0);
         player.currentPlace = starting;
         player.points = points;
         return player;
@@ -205,6 +207,10 @@ public class Player {
 
     public int getFreeTurns() {
         return freeTurns;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public enum Status {

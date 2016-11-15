@@ -40,7 +40,7 @@ public class RollPassByBombTest {
 
     @Test
     public void should_end_turn_and_go_to_hospital_when_pass_by_bomb() throws Exception {
-        Player player = new Player();
+        Player player = new Player(1, 0);
 
         player.executeCommand(rollCommand);
 
