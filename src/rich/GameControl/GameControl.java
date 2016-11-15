@@ -59,8 +59,7 @@ public class GameControl {
     }
 
     public void startGame() {
-        Comparator<Player> comparator = (p1, p2) -> p1.getId() > p2. getId() ? 1 : -1;
-        players.sort(comparator);
+        players.sort((p1, p2) -> p1.getId() > p2. getId() ? 1 : -1);
     }
 
     public void startTurn() {

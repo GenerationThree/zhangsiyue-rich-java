@@ -19,7 +19,6 @@ public class Player implements Commander {
     private Place currentPlace;
     private double balance;
     private List<Place> estates;
-    private Command lastExecuted;
     private int freeTurns;
     private int waitTurn;
     private int points;
