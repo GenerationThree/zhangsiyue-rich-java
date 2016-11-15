@@ -15,7 +15,7 @@ public interface Map {
 
     Place findPlace(int position);
 
-    void putInGame(GameControl gameControl);
+    void putInGame(GameControl gameControlControl);
 
     boolean useTool(Place current, int distance, Tool.Type type);
 

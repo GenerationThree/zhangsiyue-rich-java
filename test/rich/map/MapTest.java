@@ -17,12 +17,12 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class MapTest {
-    private GameControl gameControl;
+    private GameControl gameControlControl;
 
     @Before
     public void setUp() throws Exception {
-        gameControl = mock(GameControl.class);
-        when(gameControl.getPlayers()).thenReturn(new ArrayList<>());
+        gameControlControl = mock(GameControl.class);
+        when(gameControlControl.getPlayers()).thenReturn(new ArrayList<>());
     }
 
     @Test
@@ -52,7 +52,7 @@ public class MapTest {
         Place other = mock(Place.class);
         Place target = mock(Place.class);
         Map map = new GameMap(current, other, target);
-        map.putInGame(gameControl);
+        map.putInGame(gameControlControl);
 
         assertThat(map.useTool(current, -1, Tool.Type.BLOCK), is(true));
 
@@ -65,7 +65,7 @@ public class MapTest {
         Place other = mock(Place.class);
         Place target = mock(Place.class);
         Map map = new GameMap(current, target, other);
-        map.putInGame(gameControl);
+        map.putInGame(gameControlControl);
 
         map.useTool(current, 1, Tool.Type.BLOCK);
         map.useTool(current, 2, Tool.Type.BOMB);
@@ -82,7 +82,7 @@ public class MapTest {
         Place other = mock(Place.class);
         Place target = mock(Place.class);
         Map map = new GameMap(current, target, other);
-        map.putInGame(gameControl);
+        map.putInGame(gameControlControl);
 
         assertThat(map.useTool(current, 1, Tool.Type.BLOCK), is(true));
         assertThat(map.useTool(current, 1, Tool.Type.BOMB), is(false));
@@ -96,11 +96,11 @@ public class MapTest {
         Place other = mock(Place.class);
         Place target = mock(Place.class);
         Player otherPlayer = Player.createPlayerWithStarting(target);
-        when(gameControl.getPlayers()).thenReturn(new ArrayList<Player>(){{
+        when(gameControlControl.getPlayers()).thenReturn(new ArrayList<Player>(){{
             add(otherPlayer);
         }});
         Map map = new GameMap(current, target, other);
-        map.putInGame(gameControl);
+        map.putInGame(gameControlControl);
 
         assertThat(map.useTool(current, 1, Tool.Type.BLOCK), is(false));
         assertThat(map.getTool(target), nullValue());

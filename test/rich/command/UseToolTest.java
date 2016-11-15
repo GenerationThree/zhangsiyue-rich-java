@@ -21,16 +21,16 @@ public class UseToolTest {
     private Command useToolCommand;
     private Place current;
     private Place target;
-    private GameControl gameControl;
+    private GameControl gameControlControl;
 
     @Before
     public void setUp() throws Exception {
         current = mock(Place.class);
         target = mock(Place.class);
         Map map = new GameMap(current, target);
-        gameControl = mock(GameControl.class);
-        when(gameControl.getPlayers()).thenReturn(new ArrayList<>());
-        map.putInGame(gameControl);
+        gameControlControl = mock(GameControl.class);
+        when(gameControlControl.getPlayers()).thenReturn(new ArrayList<>());
+        map.putInGame(gameControlControl);
         useToolCommand = new UseToolCommand(map, 1, Tool.Type.BLOCK);
         current = mock(Place.class);
     }

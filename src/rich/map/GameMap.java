@@ -15,7 +15,7 @@ import static java.util.Arrays.asList;
 public class GameMap implements Map {
     private List<Place> places;
     private java.util.Map toolSetList;
-    private GameControl gameControl;
+    private GameControl gameControlControl;
 
     public GameMap(Place... places) {
         this.places = new ArrayList<Place>() {{
@@ -68,8 +68,8 @@ public class GameMap implements Map {
     }
 
     @Override
-    public void putInGame(GameControl gameControl) {
-        this.gameControl = gameControl;
+    public void putInGame(GameControl gameControlControl) {
+        this.gameControlControl = gameControlControl;
     }
 
     @Override
@@ -88,7 +88,7 @@ public class GameMap implements Map {
         int targetPosition = distance + currentPosition;
 
         targetPosition = targetPosition < 0 ? targetPosition % length + length : targetPosition % length;
-        for (Player player : gameControl.getPlayers()){
+        for (Player player : gameControlControl.getPlayers()){
             if(player.getCurrentPlace().equals(places.get(targetPosition)))
                 return false;
         }

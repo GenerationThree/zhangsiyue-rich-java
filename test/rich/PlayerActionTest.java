@@ -245,9 +245,9 @@ public class PlayerActionTest {
         player.buyTool(1);
         int preToolSum = player.getTools().size();
         Map map = new GameMap(current, target);
-        GameControl gameControl = mock(GameControl.class);
-        when(gameControl.getPlayers()).thenReturn(new ArrayList<>());
-        map.putInGame(gameControl);
+        GameControl gameControlControl = mock(GameControl.class);
+        when(gameControlControl.getPlayers()).thenReturn(new ArrayList<>());
+        map.putInGame(gameControlControl);
 
         player.useTool(map, 1, Tool.Type.BLOCK);
 
@@ -262,9 +262,9 @@ public class PlayerActionTest {
         player.buyTool(1);
         int preToolSum = player.getTools().size();
         Map map = new GameMap(current, target);
-        GameControl gameControl = mock(GameControl.class);
-        when(gameControl.getPlayers()).thenReturn(new ArrayList<>());
-        map.putInGame(gameControl);
+        GameControl gameControlControl = mock(GameControl.class);
+        when(gameControlControl.getPlayers()).thenReturn(new ArrayList<>());
+        map.putInGame(gameControlControl);
 
         player.useTool(map, 1, Tool.Type.BOMB);
 
@@ -280,9 +280,9 @@ public class PlayerActionTest {
         player.buyTool(1);
         player.buyTool(1);
         Map map = new GameMap(current, target);
-        GameControl gameControl = mock(GameControl.class);
-        when(gameControl.getPlayers()).thenReturn(new ArrayList<>());
-        map.putInGame(gameControl);
+        GameControl gameControlControl = mock(GameControl.class);
+        when(gameControlControl.getPlayers()).thenReturn(new ArrayList<>());
+        map.putInGame(gameControlControl);
         player.useTool(map, 1, Tool.Type.BLOCK);
         int preToolSum = player.getTools().size();
 
