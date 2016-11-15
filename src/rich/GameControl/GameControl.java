@@ -76,4 +76,18 @@ public class GameControl {
             return survivePlayers.get(0);
         return null;
     }
+
+    public Map getMap() {
+        return map;
+    }
+
+    public Dice getDice() {
+        return dice;
+    }
+
+
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
 }
