@@ -80,7 +80,8 @@ public class Player implements Commander {
     }
 
     public void respond(Response response, String parameter) {
-        status = lastExecuted.respond(this, response, parameter);
+//        status = lastExecuted.respond(this, response, parameter);
+        status = response.execute(this, parameter);
     }
 
     public void moveTo(Place place) {

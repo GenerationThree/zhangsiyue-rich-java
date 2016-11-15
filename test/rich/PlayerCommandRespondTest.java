@@ -56,7 +56,7 @@ public class PlayerCommandRespondTest {
 
         player.executeCommand(command);
 
-        when(command.respond(eq(player), eq(response), any())).thenReturn(Status.END_TURN);
+        when(response.execute(eq(player), any())).thenReturn(Status.END_TURN);
 
         player.respond(response, "");
 
@@ -69,7 +69,8 @@ public class PlayerCommandRespondTest {
 
         player.executeCommand(command);
 
-        when(command.respond(eq(player), eq(response), any())).thenReturn(Status.WAIT_RESPONSE);
+        when(response.execute(eq(player), any())).thenReturn(Status.WAIT_RESPONSE);
+
 
         player.respond(response, "");
 

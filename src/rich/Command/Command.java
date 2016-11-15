@@ -1,7 +1,6 @@
 package rich.command;
 
 import rich.Commander;
-import rich.Player;
 import rich.Status;
 
 public interface Command {
