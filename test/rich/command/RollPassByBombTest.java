@@ -47,6 +47,5 @@ public class RollPassByBombTest {
         assertThat(player.getCurrentPlace(), is(hospital));
         assertThat(player.getStatus(), is(Player.Status.END_TURN));
         assertThat(player.getWaitTurn(), is(3));
-
     }
 }

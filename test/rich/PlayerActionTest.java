@@ -162,4 +162,18 @@ public class PlayerActionTest {
         assertThat(player.getTools().size(), is(0));
         assertThat(player.getPoints(), is(Tool.Type.BLOCK.getPointPrice() - 1));
     }
+
+    @Test
+    public void should_not_buy_tool_more_than_ten() throws Exception {
+        Place toolHouse = mock(ToolHouse.class);
+        Player player = Player.createPlayerWithPoints(toolHouse, Tool.Type.BLOCK.getPointPrice()*11 + ToolHouse.POINT_LIMIT);
+        for (int i = 0 ; i < 10; i++)
+            player.buyTool(1);
+        assertThat(player.getTools().size(), is(10));
+        int prePoints = player.getPoints();
+
+        player.buyTool(1);
+        assertThat(player.getTools().size(), is(10));
+        assertThat(player.getPoints(), is(prePoints));
+    }
 }

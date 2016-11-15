@@ -110,7 +110,7 @@ public class Player {
     }
 
     public void buyTool(int choice) {
-        if (points >= Tool.Type.values()[choice - 1].getPointPrice()) {
+        if (tools.size() < 10 && points >= Tool.Type.values()[choice - 1].getPointPrice()) {
             tools.add(new Tool(Tool.Type.values()[choice - 1]));
             points -= Tool.Type.values()[choice - 1].getPointPrice();
         }
