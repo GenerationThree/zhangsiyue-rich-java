@@ -2,6 +2,7 @@ package rich.place;
 
 import org.junit.Test;
 import rich.Player;
+import rich.Status;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -13,6 +14,6 @@ public class GiftHouseTest {
         GiftHouse giftHouse = new GiftHouse();
         Player player = mock(Player.class);
 
-        assertThat(giftHouse.arrive(player), is(Player.Status.WAIT_RESPONSE));
+        assertThat(giftHouse.arrive(player), is(Status.WAIT_RESPONSE));
     }
 }

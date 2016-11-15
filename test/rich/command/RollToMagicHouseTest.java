@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import rich.Dice;
 import rich.Player;
+import rich.Status;
 import rich.map.Map;
 import rich.place.MagicHouse;
 import rich.place.Place;
@@ -41,7 +42,7 @@ public class RollToMagicHouseTest {
 
         player.executeCommand(rollCommand);
 
-        assertThat(player.getStatus(), is(Player.Status.WAIT_RESPONSE));
+        assertThat(player.getStatus(), is(Status.WAIT_RESPONSE));
     }
 
     @Test
@@ -52,7 +53,7 @@ public class RollToMagicHouseTest {
 
         player.respond(rollCommand.UseMagic, "");
 
-        assertThat(player.getStatus(), is(Player.Status.END_TURN));
+        assertThat(player.getStatus(), is(Status.END_TURN));
 
     }
 }

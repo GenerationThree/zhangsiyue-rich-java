@@ -3,6 +3,7 @@ package rich.command;
 import org.junit.Before;
 import org.junit.Test;
 import rich.Dice;
+import rich.Status;
 import rich.map.Map;
 import rich.place.Estate;
 import rich.place.Place;
@@ -43,7 +44,7 @@ public class RollToEmptyTest {
 
         player.executeCommand(rollCommand);
 
-        assertThat(player.getStatus(), is(Player.Status.WAIT_RESPONSE));
+        assertThat(player.getStatus(), is(Status.WAIT_RESPONSE));
     }
 
     @Test
@@ -57,7 +58,7 @@ public class RollToEmptyTest {
         player.executeCommand(rollCommand);
 
         player.respond(rollCommand.YesToBuy, "");
-        assertThat(player.getStatus(), is(Player.Status.END_TURN));
+        assertThat(player.getStatus(), is(Status.END_TURN));
     }
 
     @Test
@@ -86,7 +87,7 @@ public class RollToEmptyTest {
         player.executeCommand(rollCommand);
 
         player.respond(rollCommand.NoToBuy, "");
-        assertThat(player.getStatus(), is(Player.Status.END_TURN));
+        assertThat(player.getStatus(), is(Status.END_TURN));
         assertThat(player.getEstates().size(), is(0));
         assertThat(player.getBalance(), is(INIT_BALANCE));
     }

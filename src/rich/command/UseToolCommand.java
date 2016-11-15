@@ -1,7 +1,9 @@
 package rich.command;
 
 import com.sun.xml.internal.ws.server.UnsupportedMediaException;
+import rich.Commander;
 import rich.Player;
+import rich.Status;
 import rich.map.Map;
 import rich.tool.Tool;
 
@@ -17,13 +19,13 @@ public class UseToolCommand implements Command {
     }
 
     @Override
-    public Player.Status execute(Player player) {
-        player.useTool(map, distance, type);
-        return Player.Status.WAIT_COMMAND;
+    public Status execute(Commander player) {
+        ((Player)player).useTool(map, distance, type);
+        return Status.WAIT_COMMAND;
     }
 
     @Override
-    public Player.Status respond(Player player, Response response, String parameter) {
+    public Status respond(Commander player, Response response, String parameter) {
         throw new UnsupportedMediaException();
 
     }

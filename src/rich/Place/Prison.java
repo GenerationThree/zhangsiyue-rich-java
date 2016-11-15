@@ -1,12 +1,13 @@
 package rich.place;
 
 import rich.Player;
+import rich.Status;
 
 public class Prison implements Place {
     public static final int WAIT_TURN = 2;
     @Override
-    public Player.Status arrive(Player player) {
+    public Status arrive(Player player) {
         player.inPrison(WAIT_TURN);
-        return Player.Status.END_TURN;
+        return Status.END_TURN;
     }
 }

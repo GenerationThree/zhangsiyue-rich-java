@@ -25,54 +25,54 @@ public class PlayerCommandRespondTest {
 
     @Test
     public void should_be_wait_command_after_execute_command_not_need_respond() throws Exception {
-        when(command.execute(eq(player))).thenReturn(Player.Status.WAIT_COMMAND);
+        when(command.execute(eq(player))).thenReturn(Status.WAIT_COMMAND);
 
         player.executeCommand(command);
 
-        assertThat(player.getStatus(), is(Player.Status.WAIT_COMMAND));
+        assertThat(player.getStatus(), is(Status.WAIT_COMMAND));
     }
 
     @Test
     public void should_wait_response_after_execute_command_need_response() throws Exception {
-        when(command.execute(eq(player))).thenReturn(Player.Status.WAIT_RESPONSE);
+        when(command.execute(eq(player))).thenReturn(Status.WAIT_RESPONSE);
 
         player.executeCommand(command);
 
-        assertThat(player.getStatus(), is(Player.Status.WAIT_RESPONSE));
+        assertThat(player.getStatus(), is(Status.WAIT_RESPONSE));
     }
 
     @Test
     public void should_be_end_turn_after_execute_command() throws Exception {
-        when(command.execute(eq(player))).thenReturn(Player.Status.END_TURN);
+        when(command.execute(eq(player))).thenReturn(Status.END_TURN);
 
         player.executeCommand(command);
 
-        assertThat(player.getStatus(), is(Player.Status.END_TURN));
+        assertThat(player.getStatus(), is(Status.END_TURN));
     }
 
     @Test
     public void should_be_end_turn_after_respond() throws Exception {
-        when(command.execute(eq(player))).thenReturn(Player.Status.WAIT_RESPONSE);
+        when(command.execute(eq(player))).thenReturn(Status.WAIT_RESPONSE);
 
         player.executeCommand(command);
 
-        when(command.respond(eq(player), eq(response), any())).thenReturn(Player.Status.END_TURN);
+        when(command.respond(eq(player), eq(response), any())).thenReturn(Status.END_TURN);
 
         player.respond(response, "");
 
-        assertThat(player.getStatus(), is(Player.Status.END_TURN));
+        assertThat(player.getStatus(), is(Status.END_TURN));
     }
 
     @Test
     public void should_be_wait_response_after_respond() throws Exception {
-        when(command.execute(eq(player))).thenReturn(Player.Status.WAIT_RESPONSE);
+        when(command.execute(eq(player))).thenReturn(Status.WAIT_RESPONSE);
 
         player.executeCommand(command);
 
-        when(command.respond(eq(player), eq(response), any())).thenReturn(Player.Status.WAIT_RESPONSE);
+        when(command.respond(eq(player), eq(response), any())).thenReturn(Status.WAIT_RESPONSE);
 
         player.respond(response, "");
 
-        assertThat(player.getStatus(), is(Player.Status.WAIT_RESPONSE));
+        assertThat(player.getStatus(), is(Status.WAIT_RESPONSE));
     }
 }

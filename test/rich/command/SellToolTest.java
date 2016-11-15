@@ -3,8 +3,7 @@ package rich.command;
 import org.junit.Before;
 import org.junit.Test;
 import rich.Player;
-import rich.map.GameMap;
-import rich.map.Map;
+import rich.Status;
 import rich.place.Place;
 import rich.tool.Tool;
 
@@ -34,7 +33,7 @@ public class SellToolTest {
 
         player.executeCommand(sellToolCommand);
 
-        assertThat(player.getStatus(), is(Player.Status.WAIT_COMMAND));
+        assertThat(player.getStatus(), is(Status.WAIT_COMMAND));
         assertThat(player.getPoints(), is(prePoints + Tool.Type.BLOCK.getPointPrice()));
         assertThat(player.getTools().size(), is(preToolSum - 1));
     }
@@ -49,7 +48,7 @@ public class SellToolTest {
 
         player.executeCommand(sellToolCommand);
 
-        assertThat(player.getStatus(), is(Player.Status.WAIT_COMMAND));
+        assertThat(player.getStatus(), is(Status.WAIT_COMMAND));
         assertThat(player.getPoints(), is(prePoints));
         assertThat(player.getTools().size(), is(preToolSum));
 

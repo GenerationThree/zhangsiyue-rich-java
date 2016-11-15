@@ -3,6 +3,7 @@ package rich.command;
 import org.junit.Before;
 import org.junit.Test;
 import rich.Dice;
+import rich.Status;
 import rich.map.Map;
 import rich.place.Place;
 import rich.place.Prison;
@@ -40,7 +41,7 @@ public class RollToPrisonTest {
 
         player.executeCommand(rollCommand);
 
-        assertThat(player.getStatus(), is(Player.Status.END_TURN));
+        assertThat(player.getStatus(), is(Status.END_TURN));
         assertThat(player.getWaitTurn(), is(Prison.WAIT_TURN));
     }
 }

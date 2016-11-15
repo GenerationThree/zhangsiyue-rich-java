@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import rich.Dice;
 import rich.Player;
+import rich.Status;
 import rich.map.Map;
 import rich.place.Mine;
 import rich.place.Place;
@@ -43,7 +44,7 @@ public class RollToMineTest {
 
         player.executeCommand(rollCommand);
 
-        assertThat(player.getStatus(), is(Player.Status.END_TURN));
+        assertThat(player.getStatus(), is(Status.END_TURN));
         assertThat(player.getPoints(), is(GAIN_POINTS));
     }
 }

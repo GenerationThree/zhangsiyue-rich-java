@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import rich.GameControl.GameControl;
 import rich.Player;
+import rich.Status;
 import rich.map.GameMap;
 import rich.map.Map;
 import rich.place.Place;
@@ -43,7 +44,7 @@ public class UseToolTest {
 
         player.executeCommand(useToolCommand);
 
-        assertThat(player.getStatus(), is(Player.Status.WAIT_COMMAND));
+        assertThat(player.getStatus(), is(Status.WAIT_COMMAND));
         assertThat(player.getTools().size(), is(preToolSum - 1));
     }
 }

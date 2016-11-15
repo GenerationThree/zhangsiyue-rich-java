@@ -1,7 +1,9 @@
 package rich.command;
 
 import com.sun.xml.internal.ws.server.UnsupportedMediaException;
+import rich.Commander;
 import rich.Player;
+import rich.Status;
 import rich.tool.Tool;
 
 public class SellToolCommand implements Command {
@@ -12,17 +14,17 @@ public class SellToolCommand implements Command {
     }
 
     @Override
-    public Player.Status execute(Player player) {
+    public Status execute(Commander player) {
         Tool.Type[] toolTypes = Tool.Type.values();
         if (choice >= 1 && choice <= toolTypes.length) {
             Tool.Type type = toolTypes[choice - 1];
-            player.sellTool(type);
+            ((Player)player).sellTool(type);
         }
-        return Player.Status.WAIT_COMMAND;
+        return Status.WAIT_COMMAND;
     }
 
     @Override
-    public Player.Status respond(Player player, Response response, String parameter) {
+    public Status respond(Commander player, Response response, String parameter) {
         throw new UnsupportedMediaException();
     }
 }

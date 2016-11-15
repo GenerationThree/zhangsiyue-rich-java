@@ -3,6 +3,7 @@ package rich.command;
 import org.junit.Before;
 import org.junit.Test;
 import rich.Dice;
+import rich.Status;
 import rich.map.Map;
 import rich.place.Place;
 import rich.place.ToolHouse;
@@ -42,7 +43,7 @@ public class RollToToolHouseTest {
 
         player.executeCommand(rollCommand);
 
-        assertThat(player.getStatus(), is(Player.Status.WAIT_RESPONSE));
+        assertThat(player.getStatus(), is(Status.WAIT_RESPONSE));
     }
 
     @Test
@@ -51,7 +52,7 @@ public class RollToToolHouseTest {
 
         player.executeCommand(rollCommand);
 
-        assertThat(player.getStatus(), is(Player.Status.END_TURN));
+        assertThat(player.getStatus(), is(Status.END_TURN));
     }
 
     @Test
@@ -62,7 +63,7 @@ public class RollToToolHouseTest {
 
         player.respond(rollCommand.BuyToll, "1");
 
-        assertThat(player.getStatus(), is(Player.Status.WAIT_RESPONSE));
+        assertThat(player.getStatus(), is(Status.WAIT_RESPONSE));
         assertThat(player.getPoints(), is(100 - Tool.Type.BLOCK.getPointPrice()));
     }
 
@@ -74,7 +75,7 @@ public class RollToToolHouseTest {
 
         player.respond(rollCommand.BuyToll, "1");
 
-        assertThat(player.getStatus(), is(Player.Status.END_TURN));
+        assertThat(player.getStatus(), is(Status.END_TURN));
     }
 
     @Test
@@ -85,7 +86,7 @@ public class RollToToolHouseTest {
 
         player.respond(rollCommand.QuiteToolHouse, "");
 
-        assertThat(player.getStatus(), is(Player.Status.END_TURN));
+        assertThat(player.getStatus(), is(Status.END_TURN));
 
     }
 }

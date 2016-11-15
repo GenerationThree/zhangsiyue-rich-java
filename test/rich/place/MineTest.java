@@ -2,6 +2,7 @@ package rich.place;
 
 import org.junit.Test;
 import rich.Player;
+import rich.Status;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -13,7 +14,7 @@ public class MineTest {
         Mine mine = new Mine(gainPoints);
         Player player = Player.createPlayerWithPoints(mine, 0);
 
-        assertThat(mine.arrive(player), is(Player.Status.END_TURN));
+        assertThat(mine.arrive(player), is(Status.END_TURN));
         assertThat(player.getPoints(), is(gainPoints));
     }
 }

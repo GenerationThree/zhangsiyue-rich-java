@@ -3,6 +3,7 @@ package rich.command;
 import org.junit.Before;
 import org.junit.Test;
 import rich.Dice;
+import rich.Status;
 import rich.map.Map;
 import rich.place.Estate;
 import rich.place.Place;
@@ -45,7 +46,7 @@ public class RollToOtherEstateTest {
 
         player.executeCommand(rollCommand);
 
-        assertThat(player.getStatus(), is(Player.Status.END_TURN));
+        assertThat(player.getStatus(), is(Status.END_TURN));
     }
 
     @Test
@@ -66,6 +67,6 @@ public class RollToOtherEstateTest {
 
         player.executeCommand(rollCommand);
 
-        assertThat(player.getStatus(), is(Player.Status.END_GAME));
+        assertThat(player.getStatus(), is(Status.END_GAME));
     }
 }

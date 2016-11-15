@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import rich.Dice;
 import rich.Player;
+import rich.Status;
 import rich.map.GameMap;
 import rich.map.Map;
 import rich.place.Hospital;
@@ -45,7 +46,7 @@ public class RollPassByBombTest {
         player.executeCommand(rollCommand);
 
         assertThat(player.getCurrentPlace(), is(hospital));
-        assertThat(player.getStatus(), is(Player.Status.END_TURN));
+        assertThat(player.getStatus(), is(Status.END_TURN));
         assertThat(player.getWaitTurn(), is(3));
     }
 }

@@ -1,10 +1,11 @@
 package rich.place;
 
 import rich.Player;
+import rich.Status;
 
 public class MagicHouse implements Place {
     @Override
-    public Player.Status arrive(Player player) {
-        return Player.Status.WAIT_RESPONSE;
+    public Status arrive(Player player) {
+        return Status.WAIT_RESPONSE;
     }
 }

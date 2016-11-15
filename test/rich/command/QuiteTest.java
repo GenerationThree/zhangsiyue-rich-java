@@ -2,6 +2,7 @@ package rich.command;
 
 import org.junit.Test;
 import rich.Player;
+import rich.Status;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -14,6 +15,6 @@ public class QuiteTest {
 
         player.executeCommand(quiteCommand);
 
-        assertThat(player.getStatus(), is(Player.Status.END_GAME));
+        assertThat(player.getStatus(), is(Status.END_GAME));
     }
 }

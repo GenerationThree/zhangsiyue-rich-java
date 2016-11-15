@@ -1,7 +1,9 @@
 package rich.command;
 
 import com.sun.xml.internal.ws.server.UnsupportedMediaException;
+import rich.Commander;
 import rich.Player;
+import rich.Status;
 import rich.map.Map;
 import rich.place.Place;
 
@@ -16,14 +18,14 @@ public class SellCommand implements Command{
 
 
     @Override
-    public Player.Status execute(Player player) {
+    public Status execute(Commander player) {
         Place target = map.findPlace(position);
-        player.sellEstate(target);
-        return Player.Status.WAIT_COMMAND;
+        ((Player)player).sellEstate(target);
+        return Status.WAIT_COMMAND;
     }
 
     @Override
-    public Player.Status respond(Player player, Response response, String parameter) {
+    public Status respond(Commander player, Response response, String parameter) {
         throw new UnsupportedMediaException();
     }
 }

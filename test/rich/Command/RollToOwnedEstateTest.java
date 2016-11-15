@@ -3,6 +3,7 @@ package rich.command;
 import org.junit.Before;
 import org.junit.Test;
 import rich.Dice;
+import rich.Status;
 import rich.map.Map;
 import rich.place.Estate;
 import rich.place.Place;
@@ -40,11 +41,11 @@ public class RollToOwnedEstateTest {
     @Test
     public void should_wait_response_when_roll_owned_estate() throws Exception {
         Player player = Player.createPlayerWithBalanceAndEstate(starting, INIT_BALANCE, estate);
-        when(estate.arrive(player)).thenReturn(Player.Status.WAIT_RESPONSE);
+        when(estate.arrive(player)).thenReturn(Status.WAIT_RESPONSE);
 
         player.executeCommand(rollCommand);
 
-        assertThat(player.getStatus(), is(Player.Status.WAIT_RESPONSE));
+        assertThat(player.getStatus(), is(Status.WAIT_RESPONSE));
     }
 
     @Test
@@ -55,7 +56,7 @@ public class RollToOwnedEstateTest {
         player.executeCommand(rollCommand);
         player.respond(rollCommand.YesToPromote, "");
 
-        assertThat(player.getStatus(), is(Player.Status.END_TURN));
+        assertThat(player.getStatus(), is(Status.END_TURN));
     }
 
     @Test

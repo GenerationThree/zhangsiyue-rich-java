@@ -2,6 +2,7 @@ package rich.place;
 
 import org.junit.Test;
 import rich.Player;
+import rich.Status;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -60,7 +61,7 @@ public class EstateTest {
         Estate estate = new Estate(200);
         Player player = mock(Player.class);
 
-        assertThat(estate.arrive(player), is(Player.Status.WAIT_RESPONSE));
+        assertThat(estate.arrive(player), is(Status.WAIT_RESPONSE));
     }
 
     @Test
@@ -68,7 +69,7 @@ public class EstateTest {
         Player player = mock(Player.class);
         Estate estate = Estate.createEstateWithOwner(200, player);
 
-        assertThat(estate.arrive(player), is(Player.Status.WAIT_RESPONSE));
+        assertThat(estate.arrive(player), is(Status.WAIT_RESPONSE));
 
     }
 
@@ -79,7 +80,7 @@ public class EstateTest {
         Player player = Player.createPlayerWithBalanceAndEstate(estate, INIT_BALANCE);
         final double fee = estate.getPrice() * estate.getLevel().getFeeTimes();
 
-        assertThat(estate.arrive(player), is(Player.Status.END_TURN));
+        assertThat(estate.arrive(player), is(Status.END_TURN));
         assertThat(player.getBalance(), is(INIT_BALANCE - fee));
         assertThat(otherPlayer.getBalance(), is(INIT_BALANCE + fee));
     }
@@ -91,7 +92,7 @@ public class EstateTest {
         final double fee = estate.getPrice() * estate.getLevel().getFeeTimes();
         Player player = Player.createPlayerWithBalanceAndEstate(estate, fee - 1);
 
-        assertThat(estate.arrive(player), is(Player.Status.END_GAME));
+        assertThat(estate.arrive(player), is(Status.END_GAME));
         assertThat(otherPlayer.getBalance(), is(INIT_BALANCE));
     }
 }

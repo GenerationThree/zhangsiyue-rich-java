@@ -1,8 +1,9 @@
 package rich.command;
 
 import rich.Player;
+import rich.Status;
 
 public interface Response {
 
-    Player.Status execute(Player player, String parameter);
+    Status execute(Player player, String parameter);
 }

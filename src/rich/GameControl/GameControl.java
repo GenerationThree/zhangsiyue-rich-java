@@ -2,6 +2,7 @@ package rich.GameControl;
 
 import rich.Dice;
 import rich.Player;
+import rich.Status;
 import rich.map.Map;
 
 import java.util.ArrayList;
@@ -71,7 +72,7 @@ public class GameControl {
     }
 
     public Player findWinner() {
-        List<Player> survivePlayers = players.stream().filter(player -> player.getStatus() != Player.Status.END_GAME).collect(Collectors.toList());
+        List<Player> survivePlayers = players.stream().filter(player -> player.getStatus() != Status.END_GAME).collect(Collectors.toList());
         if(survivePlayers.size() == 1)
             return survivePlayers.get(0);
         return null;

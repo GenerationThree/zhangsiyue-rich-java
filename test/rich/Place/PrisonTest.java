@@ -2,6 +2,7 @@ package rich.place;
 
 import org.junit.Test;
 import rich.Player;
+import rich.Status;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -12,7 +13,7 @@ public class PrisonTest {
         Prison prison = new Prison();
         Player player = new Player(1, 0);
 
-        assertThat(prison.arrive(player), is(Player.Status.END_TURN));
+        assertThat(prison.arrive(player), is(Status.END_TURN));
         assertThat(player.getWaitTurn(), is(Prison.WAIT_TURN));
     }
 }

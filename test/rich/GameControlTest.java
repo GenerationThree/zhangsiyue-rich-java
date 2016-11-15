@@ -48,16 +48,16 @@ public class GameControlTest {
         Player secondPlayer = mock(Player.class);
         Player winnerPlayer = mock(Player.class);
 
-        when(firstPlayer.getStatus()).thenReturn(Player.Status.END_TURN);
-        when(secondPlayer.getStatus()).thenReturn(Player.Status.END_TURN);
-        when(winnerPlayer.getStatus()).thenReturn(Player.Status.END_TURN);
+        when(firstPlayer.getStatus()).thenReturn(Status.END_TURN);
+        when(secondPlayer.getStatus()).thenReturn(Status.END_TURN);
+        when(winnerPlayer.getStatus()).thenReturn(Status.END_TURN);
 
         GameControl gameControl = GameControl.createGameWithPlayers(map, dice, firstPlayer, secondPlayer, winnerPlayer);
 
         assertThat(gameControl.findWinner(), is(nullValue()));
 
-        when(firstPlayer.getStatus()).thenReturn(Player.Status.END_GAME);
-        when(secondPlayer.getStatus()).thenReturn(Player.Status.END_GAME);
+        when(firstPlayer.getStatus()).thenReturn(Status.END_GAME);
+        when(secondPlayer.getStatus()).thenReturn(Status.END_GAME);
 
         assertThat(gameControl.findWinner(), is(winnerPlayer));
     }

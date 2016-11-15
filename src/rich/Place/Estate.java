@@ -1,6 +1,7 @@
 package rich.place;
 
 import rich.Player;
+import rich.Status;
 
 public class Estate implements Place {
     private Player owner;
@@ -54,14 +55,14 @@ public class Estate implements Place {
     }
 
     @Override
-    public Player.Status arrive(Player player) {
+    public Status arrive(Player player) {
         if (owner == null || owner == player)
-            return Player.Status.WAIT_RESPONSE;
+            return Status.WAIT_RESPONSE;
         else {
             if (player.payFee())
-                return Player.Status.END_TURN;
+                return Status.END_TURN;
             else
-                return Player.Status.END_GAME;
+                return Status.END_GAME;
         }
     }
 

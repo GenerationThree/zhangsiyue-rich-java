@@ -3,6 +3,7 @@ package rich.command;
 import org.junit.Before;
 import org.junit.Test;
 import rich.Player;
+import rich.Status;
 import rich.map.GameMap;
 import rich.map.Map;
 import rich.place.Estate;
@@ -36,7 +37,7 @@ public class SellEstateTest {
         player.executeCommand(sellCommand);
 
         assertThat(player.getBalance(), is(preBalance + estate.getPrice() * 2 *(level.ordinal() + 1)));
-        assertThat(player.getStatus(), is(Player.Status.WAIT_COMMAND));
+        assertThat(player.getStatus(), is(Status.WAIT_COMMAND));
         assertThat(player.getEstates().size(), is(preEstateNum - 1));
     }
 }

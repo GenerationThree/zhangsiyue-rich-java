@@ -1,8 +1,9 @@
 package rich.place;
 
 import rich.Player;
+import rich.Status;
 
 public interface Place {
 
-    Player.Status arrive(Player player);
+    Status arrive(Player player);
 }

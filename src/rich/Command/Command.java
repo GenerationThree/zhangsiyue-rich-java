@@ -1,10 +1,12 @@
 package rich.command;
 
+import rich.Commander;
 import rich.Player;
+import rich.Status;
 
 public interface Command {
 
-    Player.Status execute(Player player);
+    Status execute(Commander player);
 
-    Player.Status respond(Player player, Response response, String parameter);
+    Status respond(Commander player, Response response, String parameter);
 }

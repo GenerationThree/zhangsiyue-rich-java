@@ -1,6 +1,7 @@
 package rich.place;
 
 import rich.Player;
+import rich.Status;
 import rich.tool.Tool;
 
 import java.util.Arrays;
@@ -18,9 +19,9 @@ public class ToolHouse implements Place {
     }
 
     @Override
-    public Player.Status arrive(Player player) {
+    public Status arrive(Player player) {
         if(player.getPoints() < POINT_LIMIT)
-            return Player.Status.END_TURN;
-        return Player.Status.WAIT_RESPONSE;
+            return Status.END_TURN;
+        return Status.WAIT_RESPONSE;
     }
 }

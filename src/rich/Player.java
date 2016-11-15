@@ -14,7 +14,7 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 
-public class Player {
+public class Player implements Commander {
     private int id;
     private Status status;
     private Place currentPlace;
@@ -73,6 +73,7 @@ public class Player {
             waitTurn --;
     }
 
+    @Override
     public void executeCommand(Command command) {
         status = command.execute(this);
         lastExecuted = command;
@@ -223,7 +224,4 @@ public class Player {
         return id;
     }
 
-    public enum Status {
-        WAIT_RESPONSE, END_TURN, WAIT_COMMAND, END_GAME
-    }
 }

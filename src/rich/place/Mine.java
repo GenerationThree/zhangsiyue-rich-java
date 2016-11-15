@@ -1,6 +1,7 @@
 package rich.place;
 
 import rich.Player;
+import rich.Status;
 
 public class Mine implements Place {
     private int points;
@@ -10,8 +11,8 @@ public class Mine implements Place {
     }
 
     @Override
-    public Player.Status arrive(Player player) {
+    public Status arrive(Player player) {
         player.gainPoints(points);
-        return Player.Status.END_TURN;
+        return Status.END_TURN;
     }
 }
