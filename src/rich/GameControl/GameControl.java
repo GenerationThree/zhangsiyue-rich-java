@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface GameControl {
 
-    public List<Player> getPlayers();
+    List<Player> getPlayers();
 
+    void setInitBalance(double initBalance) throws Exception;
 }
