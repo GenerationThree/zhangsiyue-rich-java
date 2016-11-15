@@ -1,10 +1,17 @@
 package rich;
 
 import org.junit.Test;
+import rich.GameControl.GameControl;
+import rich.map.GameMap;
+import rich.map.Map;
 import rich.place.*;
 import rich.tool.Tool;
 
+import java.util.ArrayList;
+
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -228,5 +235,59 @@ public class PlayerActionTest {
 
         assertThat(player.getTools().size(), is(0));
         assertThat(player.getPoints(), is(100));
+    }
+
+    @Test
+    public void should_remove_owned_tool_when_use_tool() throws Exception {
+        Place current = mock(Place.class);
+        Place target = mock(Place.class);
+        Player player = Player.createPlayerWithPoints(current, 100);
+        player.buyTool(1);
+        int preToolSum = player.getTools().size();
+        Map map = new GameMap(current, target);
+        GameControl gameControl = mock(GameControl.class);
+        when(gameControl.getPlayers()).thenReturn(new ArrayList<>());
+        map.putInGame(gameControl);
+
+        player.useTool(map, 1, Tool.Type.BLOCK);
+
+        assertThat(player.getTools().size(), is(preToolSum - 1));
+    }
+
+    @Test
+    public void should_not_use_tool_when_player_have_no_specified_tool() throws Exception {
+        Place current = mock(Place.class);
+        Place target = mock(Place.class);
+        Player player = Player.createPlayerWithPoints(current, 100);
+        player.buyTool(1);
+        int preToolSum = player.getTools().size();
+        Map map = new GameMap(current, target);
+        GameControl gameControl = mock(GameControl.class);
+        when(gameControl.getPlayers()).thenReturn(new ArrayList<>());
+        map.putInGame(gameControl);
+
+        player.useTool(map, 1, Tool.Type.BOMB);
+
+        assertThat(player.getTools().size(), is(preToolSum));
+        assertThat(map.getTool(target), nullValue());
+    }
+
+    @Test
+    public void should_not_remove_owned_tool_when_use_tool_fail() throws Exception {
+        Place current = mock(Place.class);
+        Place target = mock(Place.class);
+        Player player = Player.createPlayerWithPoints(current, 100);
+        player.buyTool(1);
+        player.buyTool(1);
+        Map map = new GameMap(current, target);
+        GameControl gameControl = mock(GameControl.class);
+        when(gameControl.getPlayers()).thenReturn(new ArrayList<>());
+        map.putInGame(gameControl);
+        player.useTool(map, 1, Tool.Type.BLOCK);
+        int preToolSum = player.getTools().size();
+
+        player.useTool(map, 1, Tool.Type.BLOCK);
+
+        assertThat(player.getTools().size(), is(preToolSum));
     }
 }

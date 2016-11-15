@@ -165,7 +165,14 @@ public class Player {
     }
 
     public void useTool(Map map, int distance, Tool.Type type){
-
+        for (Tool tool : tools){
+            if(tool.getType() == type){
+                if(map.useTool(currentPlace, distance, type)) {
+                    tools.remove(tool);
+                    break;
+                }
+            }
+        }
     }
 
     public Status getStatus() {
