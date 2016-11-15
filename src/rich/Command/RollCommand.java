@@ -72,4 +72,6 @@ public class RollCommand implements Command {
         return Player.Status.END_TURN;
     };
 
+    public static Response UseMagic = ((player, parameter) -> Player.Status.END_TURN);
+
 }

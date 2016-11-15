@@ -10,7 +10,6 @@ import rich.place.Place;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -43,5 +42,17 @@ public class RollToMagicHouseTest {
         player.executeCommand(rollCommand);
 
         assertThat(player.getStatus(), is(Player.Status.WAIT_RESPONSE));
+    }
+
+    @Test
+    public void should_end_turn_after_response_at_magicHouse() throws Exception {
+        Player player = Player.createPlayerWithStarting(starting);
+
+        player.executeCommand(rollCommand);
+
+        player.respond(rollCommand.UseMagic, "");
+
+        assertThat(player.getStatus(), is(Player.Status.END_TURN));
+
     }
 }
