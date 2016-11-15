@@ -1,7 +1,7 @@
 package rich.place;
 
 import org.junit.Test;
-import rich.Player;
+import rich.commander.Player;
 import rich.Status;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -92,7 +92,7 @@ public class EstateTest {
         final double fee = estate.getPrice() * estate.getLevel().getFeeTimes();
         Player player = Player.createPlayerWithBalanceAndEstate(estate, fee - 1);
 
-        assertThat(estate.arrive(player), is(Status.END_GAME));
+        assertThat(estate.arrive(player), is(Status.LOSE_GAME));
         assertThat(otherPlayer.getBalance(), is(INIT_BALANCE));
     }
 }

@@ -1,7 +1,7 @@
 package rich.place;
 
 import org.junit.Test;
-import rich.Player;
+import rich.commander.Player;
 import rich.Status;
 
 import static org.hamcrest.CoreMatchers.is;

@@ -1,4 +1,4 @@
-package rich;
+package rich.commander;
 
 import rich.command.Command;
 

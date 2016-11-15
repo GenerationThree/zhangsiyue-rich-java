@@ -1,7 +1,7 @@
 package rich.command.command;
 
-import rich.Commander;
-import rich.Player;
+import rich.commander.Commander;
+import rich.commander.Player;
 import rich.Status;
 import rich.command.Command;
 import rich.tool.Tool;

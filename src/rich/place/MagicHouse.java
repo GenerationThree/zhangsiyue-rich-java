@@ -1,6 +1,6 @@
 package rich.place;
 
-import rich.Player;
+import rich.commander.Player;
 import rich.Status;
 
 public class MagicHouse implements Place {

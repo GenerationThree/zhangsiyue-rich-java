@@ -2,7 +2,7 @@ package rich.command;
 
 import org.junit.Before;
 import org.junit.Test;
-import rich.Player;
+import rich.commander.Player;
 import rich.Status;
 import rich.command.command.SellCommand;
 import rich.map.GameMap;

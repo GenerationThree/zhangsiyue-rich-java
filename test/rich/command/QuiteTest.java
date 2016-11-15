@@ -1,7 +1,7 @@
 package rich.command;
 
 import org.junit.Test;
-import rich.Player;
+import rich.commander.Player;
 import rich.Status;
 import rich.command.command.QuiteCommand;
 
@@ -16,6 +16,6 @@ public class QuiteTest {
 
         player.execute(quiteCommand);
 
-        assertThat(player.getStatus(), is(Status.END_GAME));
+        assertThat(player.getStatus(), is(Status.LOSE_GAME));
     }
 }

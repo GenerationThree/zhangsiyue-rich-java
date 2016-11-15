@@ -1,9 +1,10 @@
 package rich.map;
 
-import rich.GameControl.GameControl;
-import rich.Player;
+import rich.commander.GameControl;
+import rich.commander.Player;
 import rich.place.Hospital;
 import rich.place.Place;
+import rich.place.StartPoint;
 import rich.tool.Tool;
 
 import java.util.ArrayList;
@@ -24,10 +25,19 @@ public class GameMap implements Map {
         toolSetList = new HashMap<>();
     }
 
+    public GameMap(List<Place> places) {
+        this.places = places;
+        toolSetList = new HashMap<>();
+    }
+
     public static GameMap createMapWithTools(int position, Tool tool, Place... places) {
         GameMap gameMap = new GameMap(places);
         gameMap.toolSetList.put(position, tool);
         return gameMap;
+    }
+
+    private void initMap(){
+
     }
 
     @Override
@@ -98,4 +108,19 @@ public class GameMap implements Map {
         }
         return false;
     }
+
+    @Override
+    public List<Place> getPlaces() {
+        return places;
+    }
+
+    @Override
+    public Place findStartPoint() {
+        return places
+                .stream()
+                .filter(place -> place instanceof StartPoint)
+                .findFirst()
+                .orElse(null);
+    }
+
 }

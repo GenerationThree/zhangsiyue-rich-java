@@ -1,6 +1,6 @@
 package rich.command;
 
-import rich.Commander;
+import rich.commander.Commander;
 import rich.Status;
 
 public interface Command {

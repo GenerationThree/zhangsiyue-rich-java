@@ -10,7 +10,7 @@ import rich.command.response.QuiteToolHouseResponse;
 import rich.map.Map;
 import rich.place.Place;
 import rich.place.ToolHouse;
-import rich.Player;
+import rich.commander.Player;
 import rich.tool.Tool;
 
 import static org.hamcrest.CoreMatchers.is;

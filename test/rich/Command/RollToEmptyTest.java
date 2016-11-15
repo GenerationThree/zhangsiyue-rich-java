@@ -10,7 +10,7 @@ import rich.command.response.YesToBuyResponse;
 import rich.map.Map;
 import rich.place.Estate;
 import rich.place.Place;
-import rich.Player;
+import rich.commander.Player;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;

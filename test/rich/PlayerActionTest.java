@@ -1,7 +1,8 @@
 package rich;
 
 import org.junit.Test;
-import rich.GameControl.GameControl;
+import rich.commander.Player;
+import rich.commander.GameControl;
 import rich.map.GameMap;
 import rich.map.Map;
 import rich.place.*;

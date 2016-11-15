@@ -2,7 +2,8 @@ package rich;
 
 import org.junit.Before;
 import org.junit.Test;
-import rich.GameControl.GameControl;
+import rich.commander.Player;
+import rich.commander.GameControl;
 import rich.map.Map;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -56,8 +57,8 @@ public class GameControlTest {
 
         assertThat(gameControl.findWinner(), is(nullValue()));
 
-        when(firstPlayer.getStatus()).thenReturn(Status.END_GAME);
-        when(secondPlayer.getStatus()).thenReturn(Status.END_GAME);
+        when(firstPlayer.getStatus()).thenReturn(Status.LOSE_GAME);
+        when(secondPlayer.getStatus()).thenReturn(Status.LOSE_GAME);
 
         assertThat(gameControl.findWinner(), is(winnerPlayer));
     }

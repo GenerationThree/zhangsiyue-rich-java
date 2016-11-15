@@ -1,14 +1,13 @@
 package rich.command.command;
 
-import rich.Commander;
+import rich.commander.Commander;
 import rich.Dice;
 import rich.Status;
 import rich.command.Command;
 import rich.map.Map;
 import rich.place.Hospital;
 import rich.place.Place;
-import rich.place.ToolHouse;
-import rich.Player;
+import rich.commander.Player;
 import rich.tool.Tool;
 
 public class RollCommand implements Command {

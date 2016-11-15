@@ -9,7 +9,7 @@ import rich.command.response.SelectGiftResponse;
 import rich.map.Map;
 import rich.place.GiftHouse;
 import rich.place.Place;
-import rich.Player;
+import rich.commander.Player;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;

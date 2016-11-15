@@ -2,8 +2,8 @@ package rich.command;
 
 import org.junit.Before;
 import org.junit.Test;
-import rich.GameControl.GameControl;
-import rich.Player;
+import rich.commander.GameControl;
+import rich.commander.Player;
 import rich.Status;
 import rich.command.command.UseToolCommand;
 import rich.map.GameMap;

@@ -1,6 +1,7 @@
 package rich;
 
-import rich.GameControl.GameControl;
+import rich.commander.Player;
+import rich.commander.GameControl;
 import rich.command.Command;
 import rich.command.command.*;
 import rich.command.response.*;
@@ -15,9 +16,13 @@ public class CommandConvertor {
     public static Command convert(String input, GameControl gameControl) {
         String[] inputContent = input.split(" ");
 
-        if(inputContent.length == 1){
-            if(inputContent[0].equalsIgnoreCase("rich"))
-                return new StartGameCommand();
+        if (inputContent.length == 1){
+            if(gameControl.getStatus() == Status.WAIT_INIT_BALANCE){
+                return new InitBalanceCommand(Double.valueOf(input));
+            }
+            if(gameControl.getStatus() == Status.WAIT_INIT_PLAYER){
+                return new InitPlayerCommand(input);
+            }
         }
 
         Player currentPlayer = gameControl.getCurrentPlayer();

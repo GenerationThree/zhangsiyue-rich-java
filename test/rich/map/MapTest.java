@@ -2,8 +2,8 @@ package rich.map;
 
 import org.junit.Before;
 import org.junit.Test;
-import rich.GameControl.GameControl;
-import rich.Player;
+import rich.commander.GameControl;
+import rich.commander.Player;
 import rich.place.Place;
 import rich.tool.Tool;
 

@@ -1,6 +1,6 @@
 package rich.command.response;
 
-import rich.Commander;
+import rich.commander.Commander;
 import rich.Status;
 import rich.command.Command;
 

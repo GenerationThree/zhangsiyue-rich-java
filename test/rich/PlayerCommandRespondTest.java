@@ -2,6 +2,7 @@ package rich;
 import org.junit.Before;
 import org.junit.Test;
 import rich.command.Command;
+import rich.commander.Player;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;

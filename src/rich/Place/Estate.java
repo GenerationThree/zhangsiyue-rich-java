@@ -1,6 +1,6 @@
 package rich.place;
 
-import rich.Player;
+import rich.commander.Player;
 import rich.Status;
 
 public class Estate implements Place {
@@ -62,7 +62,7 @@ public class Estate implements Place {
             if (player.payFee())
                 return Status.END_TURN;
             else
-                return Status.END_GAME;
+                return Status.LOSE_GAME;
         }
     }
 

@@ -1,5 +1,6 @@
-package rich;
+package rich.commander;
 
+import rich.Status;
 import rich.command.Command;
 import rich.map.Map;
 import rich.place.Estate;
@@ -15,6 +16,7 @@ import static java.util.Arrays.asList;
 
 public class Player implements Commander {
     private int id;
+    private String name;
     private Status status;
     private Place currentPlace;
     private double balance;
@@ -26,7 +28,47 @@ public class Player implements Commander {
 
     public Player (int id, double balance){
         this.id = id;
+        switch (id){
+            case 1:
+                name = "Q";
+                break;
+            case 2:
+                name = "A";
+                break;
+            case 3:
+                name = "S";
+                break;
+            case 4:
+                name = "J";
+                break;
+        }
         this.balance = balance;
+        status = Status.END_TURN;
+        estates = new ArrayList<>();
+        freeTurns = -1;
+        waitTurn = -1;
+        points = 0;
+        tools = new ArrayList<>();
+    }
+
+    public Player (int id, double balance, Place startPoint){
+        this.id = id;
+        switch (id){
+            case 1:
+                name = "Q";
+                break;
+            case 2:
+                name = "A";
+                break;
+            case 3:
+                name = "S";
+                break;
+            case 4:
+                name = "J";
+                break;
+        }
+        this.balance = balance;
+        currentPlace = startPoint;
         status = Status.END_TURN;
         estates = new ArrayList<>();
         freeTurns = -1;
@@ -216,5 +258,11 @@ public class Player implements Commander {
     public int getId() {
         return id;
     }
+
+
+    public String getName() {
+        return name;
+    }
+
 
 }

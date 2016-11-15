@@ -8,7 +8,7 @@ import rich.command.command.RollCommand;
 import rich.map.Map;
 import rich.place.Place;
 import rich.place.Prison;
-import rich.Player;
+import rich.commander.Player;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;

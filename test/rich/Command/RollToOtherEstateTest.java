@@ -8,7 +8,7 @@ import rich.command.command.RollCommand;
 import rich.map.Map;
 import rich.place.Estate;
 import rich.place.Place;
-import rich.Player;
+import rich.commander.Player;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -68,6 +68,6 @@ public class RollToOtherEstateTest {
 
         player.execute(rollCommand);
 
-        assertThat(player.getStatus(), is(Status.END_GAME));
+        assertThat(player.getStatus(), is(Status.LOSE_GAME));
     }
 }
