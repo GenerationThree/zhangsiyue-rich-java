@@ -11,6 +11,7 @@ public class GameDice implements Dice {
 
     @Override
     public int next() {
-        return random.nextInt(6) + 1;
+//        return random.nextInt(6) + 1;
+        return 35;
     }
 }

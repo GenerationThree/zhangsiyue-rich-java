@@ -52,6 +52,10 @@ public class CommandConvertor {
             if (inputContent[0].equalsIgnoreCase("robot") && inputContent.length == 1) {
                 return new UseToolCommand(map, 10, Tool.Type.BOMB);
             }
+            if (inputContent[0].equalsIgnoreCase("query") && inputContent.length == 1) {
+                return new QueryCommand();
+            }
+
         }
         if(currentPlayer.getStatus() == Status.WAIT_RESPONSE){
             Place currentPlace = currentPlayer.getCurrentPlace();

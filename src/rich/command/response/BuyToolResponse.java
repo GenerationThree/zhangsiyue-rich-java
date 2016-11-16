@@ -19,7 +19,6 @@ public class BuyToolResponse implements Command {
         int choice = Integer.valueOf(this.choice);
         ((Player)player).buyTool(choice);
         if (((Player)player).getPoints() >= ToolHouse.POINT_LIMIT) {
-            Printer.printMessage("欢迎光临道具屋， 请选择您所需要的道具：");
             return Status.WAIT_RESPONSE;
         }
         else

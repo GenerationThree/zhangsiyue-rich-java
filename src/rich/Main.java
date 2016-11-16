@@ -56,8 +56,10 @@ public class Main {
 
                     Command command = CommandConvertor.convert(input, gameControl);
 
-                    if (command != null)
+                    if (command != null) {
                         currentPlayer.execute(command);
+                        Printer.printStatus(currentPlayer);
+                    }
                     else
                         System.out.println("无效命令.");
                     Printer.printCurrentPlayerInfo(currentPlayer);

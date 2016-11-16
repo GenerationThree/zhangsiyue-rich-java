@@ -149,8 +149,9 @@ public class Player implements Commander {
             balance -= fee;
             ((Estate) currentPlace).getOwner().gainFee(fee);
             return true;
+        }else {
+            return false;
         }
-        return false;
     }
 
     public void gainFee(Double fee) {
@@ -225,6 +226,10 @@ public class Player implements Commander {
                 }
             }
         }
+    }
+
+    public void query(){
+        Printer.printAsset(this);
     }
 
     public Status getStatus() {
