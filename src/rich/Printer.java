@@ -10,32 +10,46 @@ public class Printer {
     public static void printMap(Map map, Player currentPlayer) {
         String mapImage = "";
         for (Place place : map.getPlaces()) {
-            if (place instanceof Estate)
-                mapImage += ((Estate) place).getLevel().ordinal();
-            if (place instanceof GiftHouse) {
-                mapImage += "G";
-            }
-            if (place instanceof Hospital) {
-                mapImage += "H";
-            }
-            if (place instanceof MagicHouse) {
-                mapImage += "M";
-            }
-            if (place instanceof Mine) {
-                mapImage += "$";
-            }
-            if (place instanceof Prison) {
-                mapImage += "P";
-            }
-            if (place instanceof ToolHouse) {
-                mapImage += "T";
-            }
-            if (place instanceof StartPoint) {
-                mapImage += "S";
+            Tool tool = map.getTool(place);
+            if (tool != null) {
+                switch (tool.getType()) {
+                    case BLOCK:
+                        mapImage += "K";
+                        break;
+                    case BOMB:
+                        mapImage += "B";
+                        break;
+                    default:
+                        break;
+                }
+            } else {
+                if (place instanceof Estate)
+                    mapImage += ((Estate) place).getLevel().ordinal();
+                if (place instanceof GiftHouse) {
+                    mapImage += "G";
+                }
+                if (place instanceof Hospital) {
+                    mapImage += "H";
+                }
+                if (place instanceof MagicHouse) {
+                    mapImage += "M";
+                }
+                if (place instanceof Mine) {
+                    mapImage += "$";
+                }
+                if (place instanceof Prison) {
+                    mapImage += "P";
+                }
+                if (place instanceof ToolHouse) {
+                    mapImage += "T";
+                }
+                if (place instanceof StartPoint) {
+                    mapImage += "S";
+                }
             }
         }
-        int index = map.getPlaces().indexOf(currentPlayer.getCurrentPlace());
         char[] charArray = mapImage.toCharArray();
+        int index = map.getPlaces().indexOf(currentPlayer.getCurrentPlace());
         charArray[index] = currentPlayer.getName().toCharArray()[0];
         mapImage = String.valueOf(charArray);
 
