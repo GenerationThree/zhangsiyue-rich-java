@@ -5,78 +5,89 @@ import rich.map.Map;
 import rich.place.*;
 import rich.tool.Tool;
 
+import java.util.List;
+
+import static org.fusesource.jansi.Ansi.Color.*;
+import static org.fusesource.jansi.Ansi.ansi;
+
 public class Printer {
 
     public static void printMap(Map map, Player currentPlayer) {
-        String mapImage = "";
-        for (Place place : map.getPlaces()) {
+
+        List<Place> places = map.getPlaces();
+        for (int i = 0; i < 29; i++)
+            printPoint(map, places.get(i), currentPlayer);
+        System.out.println();
+        for (int i = 0; i < 6; i++) {
+            printPoint(map, places.get(69 - i), currentPlayer);
+            for (int j = 0; j < 27; j++)
+                System.out.print(" ");
+            printPoint(map, places.get(29 + i), currentPlayer);
+            System.out.println();
+        }
+        for (int i = 0; i < 29; i++)
+            printPoint(map, places.get(63 - i), currentPlayer);
+        System.out.println();
+    }
+
+    private static void printPoint(Map map, Place place, Player currentPlayer){
+        if(currentPlayer.getCurrentPlace() == place){
+            System.out.print(currentPlayer.getAnsi().a(currentPlayer.getName()).reset());
+        } else {
+            if (place instanceof Estate) {
+                Estate estate = (Estate) place;
+                Player owner = estate.getOwner();
+                if (owner != null) {
+                    System.out.print(owner.getAnsi().a(estate.getLevel().ordinal()).reset());
+                } else
+                    System.out.print(estate.getLevel().ordinal());
+            }
             Tool tool = map.getTool(place);
-            if (tool != null) {
-                switch (tool.getType()) {
-                    case BLOCK:
-                        mapImage += "K";
-                        break;
+            if(tool != null){
+                switch (tool.getType()){
                     case BOMB:
-                        mapImage += "B";
+                        System.out.print("*");
+                        break;
+                    case BLOCK:
+                        System.out.print("@");
                         break;
                     default:
                         break;
                 }
-            } else {
-                if (place instanceof Estate)
-                    mapImage += ((Estate) place).getLevel().ordinal();
+            }else {
                 if (place instanceof GiftHouse) {
-                    mapImage += "G";
+                    System.out.print("G");
                 }
                 if (place instanceof Hospital) {
-                    mapImage += "H";
+                    System.out.print("H");
                 }
                 if (place instanceof MagicHouse) {
-                    mapImage += "M";
+                    System.out.print("M");
                 }
                 if (place instanceof Mine) {
-                    mapImage += "$";
+                    System.out.print("$");
                 }
                 if (place instanceof Prison) {
-                    mapImage += "P";
+                    System.out.print("P");
                 }
                 if (place instanceof ToolHouse) {
-                    mapImage += "T";
+                    System.out.print("T");
                 }
                 if (place instanceof StartPoint) {
-                    mapImage += "S";
+                    System.out.print("S");
                 }
             }
         }
-        char[] charArray = mapImage.toCharArray();
-        int index = map.getPlaces().indexOf(currentPlayer.getCurrentPlace());
-        charArray[index] = currentPlayer.getName().toCharArray()[0];
-        mapImage = String.valueOf(charArray);
-
-        for (int i = 0; i < 29; i++)
-            System.out.print(mapImage.charAt(i));
-        System.out.println();
-        for (int i = 0; i < 6; i++) {
-            System.out.print(mapImage.charAt(69 - i));
-            for (int j = 0; j < 27; j++)
-                System.out.print(" ");
-            System.out.print(mapImage.charAt(29 + i));
-            System.out.println();
-        }
-        for (int i = 0; i < 29; i++)
-            System.out.print(mapImage.charAt(63 - i));
-        System.out.println();
     }
 
     public static void printCurrentPlayerInfo(Player currentPlayer) {
         if (currentPlayer.getStatus() != Status.LOSE_GAME) {
             if (currentPlayer.getStatus() != Status.WAIT_RESPONSE) {
                 System.out.print(currentPlayer.getName());
-
                 if (currentPlayer.getFreeTurns() > -1) {
                     System.out.print(("(福神附身 :) )"));
                 }
-                System.out.print("->");
+                System.out.print(ansi().eraseScreen().fg(BLACK).a("->"));
                 if (currentPlayer.getStatus() == Status.END_TURN)
                     System.out.println("End Turn");
                 int waitTurn = currentPlayer.getWaitTurn();

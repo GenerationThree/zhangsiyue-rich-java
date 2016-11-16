@@ -1,5 +1,6 @@
 package rich.commander;
 
+import org.fusesource.jansi.Ansi;
 import rich.Printer;
 import rich.Status;
 import rich.command.Command;
@@ -14,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Arrays.asList;
+import static org.fusesource.jansi.Ansi.Color.*;
+import static org.fusesource.jansi.Ansi.ansi;
 
 public class Player implements Commander {
     private int id;
@@ -54,20 +57,6 @@ public class Player implements Commander {
 
     public Player (int id, double balance, Place startPoint){
         this.id = id;
-        switch (id){
-            case 1:
-                name = "Q";
-                break;
-            case 2:
-                name = "A";
-                break;
-            case 3:
-                name = "S";
-                break;
-            case 4:
-                name = "J";
-                break;
-        }
         this.balance = balance;
         currentPlace = startPoint;
         status = Status.END_TURN;
@@ -273,4 +262,28 @@ public class Player implements Commander {
         return name;
     }
 
+    public Ansi getAnsi() {
+        Ansi ansi;
+        switch (id){
+            case 1:
+                name = "Q";
+                ansi = ansi().eraseScreen().fg(RED);
+                break;
+            case 2:
+                name = "A";
+                ansi = ansi().eraseScreen().fg(BLUE);
+                break;
+            case 3:
+                name = "S";
+                ansi = ansi().eraseScreen().fg(GREEN);
+                break;
+            case 4:
+                name = "J";
+                ansi = ansi().eraseScreen().fg(MAGENTA);
+                break;
+            default:
+                ansi = ansi().eraseScreen().fg(BLACK);
+        }
+        return ansi;
+    }
 }
