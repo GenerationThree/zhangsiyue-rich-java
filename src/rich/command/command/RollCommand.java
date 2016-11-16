@@ -1,6 +1,5 @@
 package rich.command.command;
 
-import rich.Printer;
 import rich.commander.Commander;
 import rich.Dice;
 import rich.Status;

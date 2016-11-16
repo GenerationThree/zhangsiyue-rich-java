@@ -55,7 +55,9 @@ public class CommandConvertor {
             if (inputContent[0].equalsIgnoreCase("query") && inputContent.length == 1) {
                 return new QueryCommand();
             }
-
+            if (inputContent[0].equalsIgnoreCase("quite") && inputContent.length == 1) {
+                return new QuiteCommand();
+            }
         }
         if(currentPlayer.getStatus() == Status.WAIT_RESPONSE){
             Place currentPlace = currentPlayer.getCurrentPlace();
