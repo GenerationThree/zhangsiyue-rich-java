@@ -41,37 +41,4 @@ public class RollCommand implements Command {
         return target.arrive(player);
     }
 
-//    public static Command YesToBuy = (player) -> {
-//        ((Player)player).buy();
-//        return Status.END_TURN;
-//    };
-//
-//    public static Command NoToBuy = (player) -> Status.END_TURN;
-//
-//    public static Command YesToPromote = (player) -> {
-//        ((Player)player).promoteEstate();
-//        return Status.END_TURN;
-//    };
-//
-//    public static Command NoToPromote = (player) -> Status.END_TURN;
-//
-//    public static Command BuyToll = (player, parameter) -> {
-//        int choice = Integer.valueOf(parameter);
-//        ((Player)player).buyTool(choice);
-//        if (((Player)player).getPoints() >= ToolHouse.POINT_LIMIT)
-//            return Status.WAIT_RESPONSE;
-//        else
-//            return Status.END_TURN;
-//    };
-//
-//    public static Command QuiteToolHouse = (player) -> Status.END_TURN;
-//
-//    public static Command SelectGift = (player, parameter) -> {
-//        int choice = Integer.valueOf(parameter);
-//        ((Player)player).selectGift(choice);
-//        return Status.END_TURN;
-//    };
-//
-//    public static Command UseMagic = ((player, parameter) -> Status.END_TURN);
-
 }
