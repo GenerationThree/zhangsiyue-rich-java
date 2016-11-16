@@ -147,9 +147,10 @@ public class Player implements Commander {
         double fee = estate.getPrice() * estate.getLevel().getFeeTimes();
         if (balance >= fee) {
             balance -= fee;
-            ((Estate) currentPlace).getOwner().gainFee(fee);
+            estate.getOwner().gainFee(fee);
             return true;
         }else {
+            estate.revert();
             return false;
         }
     }

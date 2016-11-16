@@ -35,6 +35,11 @@ public class Estate implements Place {
         return  price * (level.ordinal() + 1) * 2;
     }
 
+    public void revert(){
+        level = Level.ZERO;
+        owner = null;
+    }
+
     public Player getOwner() {
         return owner;
     }
