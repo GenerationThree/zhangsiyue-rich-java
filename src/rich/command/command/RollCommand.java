@@ -38,7 +38,6 @@ public class RollCommand implements Command {
             }
         } else
             player.moveTo(target);
-        Printer.printMap(map, player);
         return target.arrive(player);
     }
 
