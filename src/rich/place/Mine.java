@@ -17,4 +17,11 @@ public class Mine implements Place {
         Printer.printMessage("采矿获得点数" + points +"点 :) ");
         return Status.END_TURN;
     }
+
+    @Override
+    public Status getStatus(Player player) {
+        if(player.getStatus() == Status.WAIT_COMMAND)
+            return Status.WAIT_COMMAND;
+        return Status.END_TURN;
+    }
 }

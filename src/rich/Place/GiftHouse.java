@@ -10,4 +10,11 @@ public class GiftHouse implements Place {
         Printer.printMessage("欢迎光临礼品屋，请选择一件您喜欢的礼品：");
         return Status.WAIT_RESPONSE;
     }
+
+    @Override
+    public Status getStatus(Player player) {
+        if(player.getStatus() == Status.WAIT_COMMAND)
+            return Status.WAIT_COMMAND;
+        return Status.WAIT_SELECT_GIFT_RESPONSE;
+    }
 }
