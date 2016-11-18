@@ -64,8 +64,11 @@ public class Main {
                         System.out.println("无效命令.");
                     Printer.printCurrentPlayerInfo(currentPlayer);
                 }
+                gameControl.endTurn();
             }
         }
+
+        System.out.println("游戏结束, " + gameControl.getWinner().getName() + "获胜.");
 
     }
 }
