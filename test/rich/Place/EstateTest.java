@@ -61,7 +61,7 @@ public class EstateTest {
         Estate estate = new Estate(200);
         Player player = mock(Player.class);
 
-        assertThat(estate.arrive(player), is(Status.WAIT_RESPONSE));
+        assertThat(estate.arrive(player), is(Status.WAIT_BUY_RESPONSE));
     }
 
     @Test
@@ -69,7 +69,7 @@ public class EstateTest {
         Player player = mock(Player.class);
         Estate estate = Estate.createEstateWithOwner(200, player);
 
-        assertThat(estate.arrive(player), is(Status.WAIT_RESPONSE));
+        assertThat(estate.arrive(player), is(Status.WAIT_BUILD_RESPONSE));
 
     }
 

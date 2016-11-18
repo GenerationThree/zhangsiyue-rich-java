@@ -44,7 +44,7 @@ public class RollToMagicHouseTest {
 
         player.execute(rollCommand);
 
-        assertThat(player.getStatus(), is(Status.WAIT_RESPONSE));
+        assertThat(player.getStatus(), is(Status.WAIT_USE_MAGIC_RESPONSE));
     }
 
     @Test

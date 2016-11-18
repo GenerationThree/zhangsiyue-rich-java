@@ -14,6 +14,6 @@ public class GiftHouseTest {
         GiftHouse giftHouse = new GiftHouse();
         Player player = mock(Player.class);
 
-        assertThat(giftHouse.arrive(player), is(Status.WAIT_RESPONSE));
+        assertThat(giftHouse.arrive(player), is(Status.WAIT_SELECT_GIFT_RESPONSE));
     }
 }

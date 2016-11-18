@@ -19,7 +19,7 @@ public class BuyToolResponse implements Command {
         int choice = Integer.valueOf(this.choice);
         ((Player)player).buyTool(choice);
         if (((Player)player).getPoints() >= ToolHouse.POINT_LIMIT) {
-            return Status.WAIT_RESPONSE;
+            return Status.WAIT_BUY_TOOL_RESPONSE;
         }
         else
             return Status.END_TURN;

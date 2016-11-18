@@ -63,8 +63,11 @@ public class Estate implements Place {
 
     @Override
     public Status arrive(Player player) {
-        if (owner == null || owner == player) {
-            return Status.WAIT_RESPONSE;
+        if (owner == null) {
+            return Status.WAIT_BUY_RESPONSE;
+        }else
+        if (owner == player) {
+            return Status.WAIT_BUILD_RESPONSE;
         }
         else {
             if (player.payFee()) {

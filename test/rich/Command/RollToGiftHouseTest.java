@@ -44,7 +44,7 @@ public class RollToGiftHouseTest {
 
         player.execute(rollCommand);
 
-        assertThat(player.getStatus(), is(Status.WAIT_RESPONSE));
+        assertThat(player.getStatus(), is(Status.WAIT_SELECT_GIFT_RESPONSE));
     }
 
     @Test

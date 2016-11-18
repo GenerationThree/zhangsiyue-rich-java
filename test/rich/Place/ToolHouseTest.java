@@ -13,7 +13,7 @@ public class ToolHouseTest {
         ToolHouse toolHouse = new ToolHouse();
         Player player = Player.createPlayerWithPoints(toolHouse, 100);
 
-        assertThat(toolHouse.arrive(player), is(Status.WAIT_RESPONSE));
+        assertThat(toolHouse.arrive(player), is(Status.WAIT_BUY_TOOL_RESPONSE));
     }
 
     @Test

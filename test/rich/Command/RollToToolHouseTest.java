@@ -46,7 +46,7 @@ public class RollToToolHouseTest {
 
         player.execute(rollCommand);
 
-        assertThat(player.getStatus(), is(Status.WAIT_RESPONSE));
+        assertThat(player.getStatus(), is(Status.WAIT_BUY_TOOL_RESPONSE));
     }
 
     @Test
@@ -66,7 +66,7 @@ public class RollToToolHouseTest {
 
         player.execute(new BuyToolResponse("1"));
 
-        assertThat(player.getStatus(), is(Status.WAIT_RESPONSE));
+        assertThat(player.getStatus(), is(Status.WAIT_BUY_TOOL_RESPONSE));
         assertThat(player.getPoints(), is(100 - Tool.Type.BLOCK.getPointPrice()));
     }
 

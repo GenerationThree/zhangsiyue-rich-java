@@ -47,7 +47,7 @@ public class RollToEmptyTest {
 
         player.execute(rollCommand);
 
-        assertThat(player.getStatus(), is(Status.WAIT_RESPONSE));
+        assertThat(player.getStatus(), is(Status.WAIT_BUY_RESPONSE));
     }
 
     @Test

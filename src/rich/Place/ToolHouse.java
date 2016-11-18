@@ -26,7 +26,7 @@ public class ToolHouse implements Place {
             return Status.END_TURN;
         }
         Printer.printMessage("欢迎光临道具屋， 请选择您所需要的道具：");
-        return Status.WAIT_RESPONSE;
+        return Status.WAIT_BUY_TOOL_RESPONSE;
     }
 
     @Override
