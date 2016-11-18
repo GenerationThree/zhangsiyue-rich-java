@@ -20,6 +20,7 @@ public class GameControl implements Commander {
     private Player currentPlayer;
     private double initBalance;
     private Status status;
+    private Player winner;
 
     public static final double INIT_BALANCE_LOW_LIMIT = 1000;
     public static final double INIT_BALANCE_HIGH_LIMIT = 50000;
@@ -40,6 +41,7 @@ public class GameControl implements Commander {
         this.dice = new GameDice();
         currentPlayer = null;
         initBalance = 10000;
+        winner = null;
         status = Status.WAIT_INIT_BALANCE;
     }
 
@@ -139,11 +141,13 @@ public class GameControl implements Commander {
         currentPlayer.startTurn();
     }
 
-    public Player findWinner() {
+    public void endTurn() {
         List<Player> survivePlayers = players.stream().filter(player -> player.getStatus() != Status.LOSE_GAME).collect(Collectors.toList());
-        if(survivePlayers.size() == 1)
-            return survivePlayers.get(0);
-        return null;
+        if(survivePlayers.size() == 1) {
+            status = Status.END_GAME;
+            winner = survivePlayers.get(0);
+        }
+        return;
     }
 
     public Map getMap() {
@@ -162,4 +166,7 @@ public class GameControl implements Commander {
         return status;
     }
 
+    public Player getWinner() {
+        return winner;
+    }
 }

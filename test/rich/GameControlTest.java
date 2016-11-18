@@ -7,6 +7,7 @@ import rich.commander.GameControl;
 import rich.map.Map;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.contains;
@@ -44,7 +45,7 @@ public class GameControlTest {
     }
 
     @Test
-    public void should_find_winner() throws Exception {
+    public void should_find_winner_when_end_turn() throws Exception {
         Player firstPlayer = mock(Player.class);
         Player secondPlayer = mock(Player.class);
         Player winnerPlayer = mock(Player.class);
@@ -54,12 +55,16 @@ public class GameControlTest {
         when(winnerPlayer.getStatus()).thenReturn(Status.END_TURN);
 
         GameControl gameControl = GameControl.createGameWithPlayers(map, dice, firstPlayer, secondPlayer, winnerPlayer);
-
-        assertThat(gameControl.findWinner(), is(nullValue()));
+        gameControl.endTurn();
+        assertThat(gameControl.getWinner(), is(nullValue()));
+        assertThat(gameControl.getStatus(), not(Status.END_GAME));
 
         when(firstPlayer.getStatus()).thenReturn(Status.LOSE_GAME);
         when(secondPlayer.getStatus()).thenReturn(Status.LOSE_GAME);
 
-        assertThat(gameControl.findWinner(), is(winnerPlayer));
+        gameControl.endTurn();
+
+        assertThat(gameControl.getWinner(), is(winnerPlayer));
+        assertThat(gameControl.getStatus(), is(Status.END_GAME));
     }
 }
