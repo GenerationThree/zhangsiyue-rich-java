@@ -11,10 +11,4 @@ public class MagicHouse implements Place {
         return Status.WAIT_USE_MAGIC_RESPONSE;
     }
 
-    @Override
-    public Status getStatus(Player player) {
-        if(player.getStatus() == Status.WAIT_COMMAND)
-            return Status.WAIT_COMMAND;
-        return Status.WAIT_USE_MAGIC_RESPONSE;
-    }
 }

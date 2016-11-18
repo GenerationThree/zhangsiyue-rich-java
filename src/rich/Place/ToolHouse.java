@@ -29,11 +29,4 @@ public class ToolHouse implements Place {
         return Status.WAIT_BUY_TOOL_RESPONSE;
     }
 
-    @Override
-    public Status getStatus(Player player) {
-        if(player.getStatus() == Status.WAIT_RESPONSE)
-            return Status.WAIT_BUY_TOOL_RESPONSE;
-        else
-            return Status.END_TURN;
-    }
 }

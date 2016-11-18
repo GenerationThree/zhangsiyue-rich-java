@@ -28,7 +28,7 @@ public class CommandConvertor {
         Map map = gameControl.getMap();
         Dice dice = gameControl.getDice();
 
-        switch (currentPlayer.getCurrentPlace().getStatus(currentPlayer)){
+        switch (currentPlayer.getStatus()){
             case WAIT_COMMAND:
                 if (inputContent[0].equalsIgnoreCase("roll") && inputContent.length == 1) {
                     return new RollCommand(map, dice);

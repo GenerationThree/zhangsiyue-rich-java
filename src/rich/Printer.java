@@ -82,7 +82,7 @@ public class Printer {
 
     public static void printCurrentPlayerInfo(Player currentPlayer) {
         if (currentPlayer.getStatus() != Status.LOSE_GAME) {
-            if (currentPlayer.getStatus() != Status.WAIT_RESPONSE) {
+            if (currentPlayer.getStatus() == Status.WAIT_COMMAND) {
                 System.out.print(currentPlayer.getName());
                 if (currentPlayer.getFreeTurns() > -1) {
                     System.out.print(("(福神附身 :) )"));
@@ -104,7 +104,7 @@ public class Printer {
     }
 
     public static void printStatus(Player currentPlayer) {
-        if (currentPlayer.getStatus() == Status.WAIT_RESPONSE) {
+        if (currentPlayer.getStatus() != Status.WAIT_COMMAND && currentPlayer.getStatus() != Status.END_TURN) {
             Place place = currentPlayer.getCurrentPlace();
             if (place instanceof Estate) {
                 Estate estate = ((Estate) place);

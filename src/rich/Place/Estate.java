@@ -1,7 +1,5 @@
 package rich.place;
 
-import com.sun.media.jfxmedia.events.PlayerStateEvent;
-import rich.Printer;
 import rich.commander.Player;
 import rich.Status;
 
@@ -77,19 +75,6 @@ public class Estate implements Place {
                 return Status.LOSE_GAME;
             }
         }
-    }
-
-    @Override
-    public Status getStatus(Player player) {
-        if(player.getStatus() == Status.WAIT_RESPONSE){
-            if (owner == null) {
-                return Status.WAIT_BUY_RESPONSE;
-            }
-            if (owner == player) {
-                return Status.WAIT_BUILD_RESPONSE;
-            }
-        }
-        return player.getStatus();
     }
 
     public enum Level {

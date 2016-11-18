@@ -7,5 +7,4 @@ public interface Place {
 
     Status arrive(Player player);
 
-    Status getStatus(Player player);
 }

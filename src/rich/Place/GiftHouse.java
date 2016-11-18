@@ -11,10 +11,4 @@ public class GiftHouse implements Place {
         return Status.WAIT_SELECT_GIFT_RESPONSE;
     }
 
-    @Override
-    public Status getStatus(Player player) {
-        if(player.getStatus() == Status.WAIT_COMMAND)
-            return Status.WAIT_COMMAND;
-        return Status.WAIT_SELECT_GIFT_RESPONSE;
-    }
 }
